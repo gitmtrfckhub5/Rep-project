@@ -2,17 +2,45 @@
 
 #1. Площа кола
 
-import math
+# import math
+#
+#
+# def circle_area(radius):
+#     area = math.pi * radius ** 2
+#     return area
+#
+#
+# r = float(input("Enter radius of circle: "))
+#
+# result = circle_area(r)
+#
+# print("Area of a circle:", result)
+#
+
+#Завдання на використання функцій з бібліотекою date:
+
+#1. Дні між датами
+
+from datetime import date
+
+def days_between_dates(date1, date2):
+    year1, month1, day1 = map(int, date1.split("-"))
+    year2, month2, day2 = map(int, date2.split("-"))
+
+    first_date = date(year1, month1, day1)
+    second_date = date(year2, month2, day2)
+
+    difference = abs((second_date - first_date).days)
+
+    return difference
 
 
-def circle_area(radius):
-    area = math.pi * radius ** 2
-    return area
+date1 = input("Enter first date (YYYY-MM-DD): ")
+date2 = input("Enter second date(YYYY-MM-DD): ")
+
+result = days_between_dates(date1, date2)
+
+print("Number of days between dates:", result)
 
 
-r = float(input("Enter radius of circle: "))
-
-result = circle_area(r)
-
-print("Area of a circle:", result)
 
