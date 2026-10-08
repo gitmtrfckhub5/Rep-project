@@ -21,26 +21,42 @@
 
 #1. Дні між датами
 
-from datetime import date
+# from datetime import date
+#
+# def days_between_dates(date1, date2):
+#     year1, month1, day1 = map(int, date1.split("-"))
+#     year2, month2, day2 = map(int, date2.split("-"))
+#
+#     first_date = date(year1, month1, day1)
+#     second_date = date(year2, month2, day2)
+#
+#     difference = abs((second_date - first_date).days)
+#
+#     return difference
+#
+#
+# date1 = input("Enter first date (YYYY-MM-DD): ")
+# date2 = input("Enter second date(YYYY-MM-DD): ")
+#
+# result = days_between_dates(date1, date2)
+#
+# print("Number of days between dates:", result)
 
-def days_between_dates(date1, date2):
-    year1, month1, day1 = map(int, date1.split("-"))
-    year2, month2, day2 = map(int, date2.split("-"))
 
-    first_date = date(year1, month1, day1)
-    second_date = date(year2, month2, day2)
+#Завдання на використання функцій з бібліотекою math:
 
-    difference = abs((second_date - first_date).days)
+#2. Обчислення факторіалу
 
-    return difference
+import math
 
+def factorial_number(n):
+    return math.factorial(n)
 
-date1 = input("Enter first date (YYYY-MM-DD): ")
-date2 = input("Enter second date(YYYY-MM-DD): ")
+number = int(input("Enter a number: "))
 
-result = days_between_dates(date1, date2)
+result = factorial_number(number)
 
-print("Number of days between dates:", result)
+print("Factorial of a number", number, "equal", result)
 
 
 
