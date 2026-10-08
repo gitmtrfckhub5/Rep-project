@@ -47,16 +47,31 @@
 
 #2. Обчислення факторіалу
 
-import math
+# import math
+#
+# def factorial_number(n):
+#     return math.factorial(n)
+#
+# number = int(input("Enter a number: "))
+#
+# result = factorial_number(number)
+#
+# print("Factorial of a number", number, "equal", result)
 
-def factorial_number(n):
-    return math.factorial(n)
+# Завдання на використання функцій з бібліотекою date:
 
-number = int(input("Enter a number: "))
+# 2. Форматування дати
 
-result = factorial_number(number)
+from datetime import datetime
 
-print("Factorial of a number", number, "equal", result)
+def format_date(date):
+    date = datetime.strptime(date, "%Y-%m-%d")
+    return date.strftime("%d/%m/%Y")
 
 
+date = input("Enter the date in the format YYYY-MM-DD: ")
+
+result = format_date(date)
+
+print("Date in the new format:", result)
 
