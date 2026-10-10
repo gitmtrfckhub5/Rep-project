@@ -62,16 +62,69 @@
 
 # 2. Форматування дати
 
-from datetime import datetime
+# from datetime import datetime
+#
+# def format_date(date):
+#     date = datetime.strptime(date, "%Y-%m-%d")
+#     return date.strftime("%d/%m/%Y")
+#
+#
+# date = input("Enter the date in the format YYYY-MM-DD: ")
+#
+# result = format_date(date)
+#
+# print("Date in the new format:", result)
 
-def format_date(date):
-    date = datetime.strptime(date, "%Y-%m-%d")
-    return date.strftime("%d/%m/%Y")
+# Завдання на використання функцій з бібліотекою math (високий рівень):
+# 1. Обчислення площі еліпса
+
+# import math
+#
+# #Create a function to calculate the area of an ellipse
+# def ploshad_ellipsa(a, b):
+#     # Calculate the area using the formula S = pi * a * b
+#     s = math.pi * a * b
+#
+#     # Return the result
+#     return s
+#
+#
+# # Enter the major semi-axis
+# a = float(input("Enter the major semi-axis: "))
+#
+# # Enter the minor semi-axis
+# b = float(input("Enter the minor semi-axis: "))
+#
+# # Call the function and save the result
+# s = ploshad_ellipsa(a, b)
+#
+# # Print the area rounded to two decimal places
+# print("The area of the ellipse is:", round(s, 2))
+
+#Завдання на використання функцій з бібліотекою math
+#2. Гармонічний ряд
+
+"""Import the math library"""
+import math
+
+"""Create a function to calculate the harmonic series"""
+def harmonic_sum(n):
+    """Set the sum to zero"""
+    total = 0
+
+    """Calculate the sum of the first n terms"""
+    for i in range(1, n + 1):
+        total = total + 1 / i
+
+    """Return the result"""
+    return total
 
 
-date = input("Enter the date in the format YYYY-MM-DD: ")
+"""Enter the number of terms"""
+n = int(input("Enter the number of terms: "))
 
-result = format_date(date)
+"""Call the function"""
+result = harmonic_sum(n)
 
-print("Date in the new format:", result)
-
+"""Print the result"""
+print("The sum of the harmonic series is:", round(result, 4))
