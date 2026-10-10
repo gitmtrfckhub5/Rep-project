@@ -62,41 +62,16 @@
 
 # 2. Форматування дати
 
-# from datetime import datetime
-#
-# def format_date(date):
-#     date = datetime.strptime(date, "%Y-%m-%d")
-#     return date.strftime("%d/%m/%Y")
-#
-#
-# date = input("Enter the date in the format YYYY-MM-DD: ")
-#
-# result = format_date(date)
-#
-# print("Date in the new format:", result)
+from datetime import datetime
 
-# Завдання на використання функцій з бібліотекою math (високий рівень):
-# 1. Обчислення площі еліпса
-
-import math
-
-#Create a function to calculate the area of an ellipse
-def ploshad_ellipsa(a, b):
-    # Calculate the area using the formula S = pi * a * b
-    s = math.pi * a * b
-
-    # Return the result
-    return s
+def format_date(date):
+    date = datetime.strptime(date, "%Y-%m-%d")
+    return date.strftime("%d/%m/%Y")
 
 
-# Enter the major semi-axis
-a = float(input("Enter the major semi-axis: "))
+date = input("Enter the date in the format YYYY-MM-DD: ")
 
-# Enter the minor semi-axis
-b = float(input("Enter the minor semi-axis: "))
+result = format_date(date)
 
-# Call the function and save the result
-s = ploshad_ellipsa(a, b)
+print("Date in the new format:", result)
 
-# Print the area rounded to two decimal places
-print("The area of the ellipse is:", round(s, 2))
