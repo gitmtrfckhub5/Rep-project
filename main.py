@@ -196,26 +196,81 @@
 
 # 2. Генерація календаря для місяця
 
-"""Import the calendar library"""
-import calendar
+# """Import the calendar library"""
+# import calendar
+#
+# """Create a function to generate a calendar"""
+# def generate_calendar(year, month):
+#     """Create the calendar for the given month and year"""
+#     cal = calendar.month(year, month)
+#
+#     """Return the calendar as text"""
+#     return cal
+#
+#
+# """Enter the year"""
+# year = int(input("Enter the year: "))
+#
+# """Enter the month number"""
+# month = int(input("Enter the month (1-12): "))
+#
+# """Call the function"""
+# result = generate_calendar(year, month)
+#
+# """Print the calendar"""
+# print(result)
 
-"""Create a function to generate a calendar"""
-def generate_calendar(year, month):
-    """Create the calendar for the given month and year"""
-    cal = calendar.month(year, month)
-
-    """Return the calendar as text"""
-    return cal
 
 
-"""Enter the year"""
-year = int(input("Enter the year: "))
+#Об'єктно-орієнтоване програмування
+#Тема: Класи. Об'єкти. Частина 1
 
-"""Enter the month number"""
-month = int(input("Enter the month (1-12): "))
 
-"""Call the function"""
-result = generate_calendar(year, month)
+#Завдання 1
+class Car:
+    def __init__(self, model, year, manufacturer, engine, color, price):
+        self.model = model
+        self.year = year
+        self.manufacturer = manufacturer
+        self.engine = engine
+        self.color = color
+        self.price = price
 
-"""Print the calendar"""
-print(result)
+    # Method to display information about the car
+    def show_info(self):
+        print("Car model:", self.model)
+        print("Year:", self.year)
+        print("Manufacturer:", self.manufacturer)
+        print("Engine volume:", self.engine, "L")
+        print("Color:", self.color)
+        print("Price:", self.price, "UAH")
+
+    # Method to change the price
+    def change_price(self, new_price):
+        self.price = new_price
+        print("Car price has been changed.")
+
+    # Method to change the color
+    def change_color(self, new_color):
+        self.color = new_color
+        print("Car color has been changed.")
+
+
+# Create an object of the Car class
+car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
+
+# Display car information
+car1.show_info()
+
+print()
+
+# Change the car price
+car1.change_price(1400000)
+
+# Change the car color
+car1.change_color("White")
+
+print()
+
+# Display updated car information
+car1.show_info()
