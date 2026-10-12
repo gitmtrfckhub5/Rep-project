@@ -227,50 +227,105 @@
 
 
 #Завдання 1
-class Car:
-    def __init__(self, model, year, manufacturer, engine, color, price):
-        self.model = model
+# class Car:
+#     def __init__(self, model, year, manufacturer, engine, color, price):
+#         self.model = model
+#         self.year = year
+#         self.manufacturer = manufacturer
+#         self.engine = engine
+#         self.color = color
+#         self.price = price
+#
+#     # Method to display information about the car
+#     def show_info(self):
+#         print("Car model:", self.model)
+#         print("Year:", self.year)
+#         print("Manufacturer:", self.manufacturer)
+#         print("Engine volume:", self.engine, "L")
+#         print("Color:", self.color)
+#         print("Price:", self.price, "UAH")
+#
+#     # Method to change the price
+#     def change_price(self, new_price):
+#         self.price = new_price
+#         print("Car price has been changed.")
+#
+#     # Method to change the color
+#     def change_color(self, new_color):
+#         self.color = new_color
+#         print("Car color has been changed.")
+#
+#
+# # Create an object of the Car class
+# car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
+#
+# # Display car information
+# car1.show_info()
+#
+# print()
+#
+# # Change the car price
+# car1.change_price(1400000)
+#
+# # Change the car color
+# car1.change_color("White")
+#
+# print()
+#
+# # Display updated car information
+# car1.show_info()
+
+
+
+#Завдання 2
+class Book:
+    """Class that stores information about a book."""
+
+    def __init__(self, title, year, publisher, genre, author, price):
+        """Initialize the book attributes."""
+        self.title = title
         self.year = year
-        self.manufacturer = manufacturer
-        self.engine = engine
-        self.color = color
+        self.publisher = publisher
+        self.genre = genre
+        self.author = author
         self.price = price
 
-    # Method to display information about the car
     def show_info(self):
-        print("Car model:", self.model)
-        print("Year:", self.year)
-        print("Manufacturer:", self.manufacturer)
-        print("Engine volume:", self.engine, "L")
-        print("Color:", self.color)
+        """Display information about the book."""
+        print("Book title:", self.title)
+        print("Year of publication:", self.year)
+        print("Publisher:", self.publisher)
+        print("Genre:", self.genre)
+        print("Author:", self.author)
         print("Price:", self.price, "UAH")
 
-    # Method to change the price
     def change_price(self, new_price):
+        """Change the price of the book."""
         self.price = new_price
-        print("Car price has been changed.")
+        print("Book price has been changed.")
 
-    # Method to change the color
-    def change_color(self, new_color):
-        self.color = new_color
-        print("Car color has been changed.")
+    def change_genre(self, new_genre):
+        """Change the genre of the book."""
+        self.genre = new_genre
+        print("Book genre has been changed.")
 
 
-# Create an object of the Car class
-car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
+"""Create an object of the Book class."""
+book1 = Book("Dune", 1965, "Chilton Books", "Science Fiction",
+             "Frank Herbert", 500)
 
-# Display car information
-car1.show_info()
-
-print()
-
-# Change the car price
-car1.change_price(1400000)
-
-# Change the car color
-car1.change_color("White")
+"""Display book information."""
+book1.show_info()
 
 print()
 
-# Display updated car information
-car1.show_info()
+"""Change the book price."""
+book1.change_price(550)
+
+"""Change the book genre."""
+book1.change_genre("Science Fiction")
+
+print()
+
+"""Display updated book information."""
+book1.show_info()
