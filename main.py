@@ -335,42 +335,82 @@
 #
 #
 # Завдання 1
+#
+# class Fraction:
+#     """
+#     A class for working with fractions.
+#     """
+#
+#     count = 0
+#
+#     def __init__(self, numerator, denominator):
+#         """
+#         Initializes a fraction and increases the object counter.
+#         """
+#         self.numerator = numerator
+#         self.denominator = denominator
+#         Fraction.count += 1
+#
+#     @staticmethod
+#     def count_objects():
+#         """
+#         Returns the number of created Fraction objects.
+#         """
+#         return Fraction.count
+#
+#
+# # Create fraction objects
+# fraction1 = Fraction(1, 2)
+# fraction2 = Fraction(3, 4)
+# fraction3 = Fraction(5, 6)
+#
+# # Display the number of created objects
+# print("Number of created fractions:", Fraction.count_objects())
 
-class Fraction:
+
+# Завдання 2
+
+class Temperature:
     """
-    A class for working with fractions.
+    A class for converting temperatures.
     """
 
     count = 0
 
-    def __init__(self, numerator, denominator):
+    @staticmethod
+    def celsius_to_fahrenheit(celsius):
         """
-        Initializes a fraction and increases the object counter.
+        Converts Celsius to Fahrenheit.
         """
-        self.numerator = numerator
-        self.denominator = denominator
-        Fraction.count += 1
+        Temperature.count += 1
+        return celsius * 9 / 5 + 32
 
     @staticmethod
-    def count_objects():
+    def fahrenheit_to_celsius(fahrenheit):
         """
-        Returns the number of created Fraction objects.
+        Converts Fahrenheit to Celsius.
         """
-        return Fraction.count
+        Temperature.count += 1
+        return (fahrenheit - 32) * 5 / 9
+
+    @staticmethod
+    def count_calculations():
+        """
+        Returns the number of temperature calculations.
+        """
+        return Temperature.count
 
 
-# Create fraction objects
-fraction1 = Fraction(1, 2)
-fraction2 = Fraction(3, 4)
-fraction3 = Fraction(5, 6)
+# Convert Celsius to Fahrenheit
+result1 = Temperature.celsius_to_fahrenheit(25)
+print("25 Celsius =", result1, "Fahrenheit")
 
-# Display the number of created objects
-print("Number of created fractions:", Fraction.count_objects())
+# Convert Fahrenheit to Celsius
+result2 = Temperature.fahrenheit_to_celsius(77)
+print("77 Fahrenheit =", result2, "Celsius")
 
-
-
-
-
+# Display the number of calculations
+print("Number of calculations:", Temperature.count_calculations())
 
 
 
