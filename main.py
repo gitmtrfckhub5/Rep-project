@@ -369,50 +369,80 @@
 
 
 # Завдання 2
+#
+# class Temperature:
+#     """
+#     A class for converting temperatures.
+#     """
+#
+#     count = 0
+#
+#     @staticmethod
+#     def celsius_to_fahrenheit(celsius):
+#         """
+#         Converts Celsius to Fahrenheit.
+#         """
+#         Temperature.count += 1
+#         return celsius * 9 / 5 + 32
+#
+#     @staticmethod
+#     def fahrenheit_to_celsius(fahrenheit):
+#         """
+#         Converts Fahrenheit to Celsius.
+#         """
+#         Temperature.count += 1
+#         return (fahrenheit - 32) * 5 / 9
+#
+#     @staticmethod
+#     def count_calculations():
+#         """
+#         Returns the number of temperature calculations.
+#         """
+#         return Temperature.count
+#
+#
+# # Convert Celsius to Fahrenheit
+# result1 = Temperature.celsius_to_fahrenheit(25)
+# print("25 Celsius =", result1, "Fahrenheit")
+#
+# # Convert Fahrenheit to Celsius
+# result2 = Temperature.fahrenheit_to_celsius(77)
+# print("77 Fahrenheit =", result2, "Celsius")
+#
+# # Display the number of calculations
+# print("Number of calculations:", Temperature.count_calculations())
 
-class Temperature:
+# Завдання 3
+
+class LengthConverter:
     """
-    A class for converting temperatures.
+    A class for converting units of length.
     """
 
-    count = 0
+    @staticmethod
+    def meters_to_feet(meters):
+        """
+        Converts meters to feet.
+        """
+        return meters * 3.28084
 
     @staticmethod
-    def celsius_to_fahrenheit(celsius):
+    def feet_to_meters(feet):
         """
-        Converts Celsius to Fahrenheit.
+        Converts feet to meters.
         """
-        Temperature.count += 1
-        return celsius * 9 / 5 + 32
-
-    @staticmethod
-    def fahrenheit_to_celsius(fahrenheit):
-        """
-        Converts Fahrenheit to Celsius.
-        """
-        Temperature.count += 1
-        return (fahrenheit - 32) * 5 / 9
-
-    @staticmethod
-    def count_calculations():
-        """
-        Returns the number of temperature calculations.
-        """
-        return Temperature.count
+        return feet / 3.28084
 
 
-# Convert Celsius to Fahrenheit
-result1 = Temperature.celsius_to_fahrenheit(25)
-print("25 Celsius =", result1, "Fahrenheit")
+# Convert meters to feet
+meters = 10
+result1 = LengthConverter.meters_to_feet(meters)
+print(meters, "meters =", round(result1, 2), "feet")
 
-# Convert Fahrenheit to Celsius
-result2 = Temperature.fahrenheit_to_celsius(77)
-print("77 Fahrenheit =", result2, "Celsius")
-
-# Display the number of calculations
-print("Number of calculations:", Temperature.count_calculations())
-
-
+# Convert feet to meters
+feet = 20
+result2 = LengthConverter.feet_to_meters(feet)
+print(feet, "feet =", round(result2, 2), "meters")
 
 
 
