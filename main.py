@@ -277,55 +277,108 @@
 
 
 
-#Завдання 2
-class Book:
-    """Class that stores information about a book."""
+# #Завдання 2
+# class Book:
+#     """Class that stores information about a book."""
+#
+#     def __init__(self, title, year, publisher, genre, author, price):
+#         """Initialize the book attributes."""
+#         self.title = title
+#         self.year = year
+#         self.publisher = publisher
+#         self.genre = genre
+#         self.author = author
+#         self.price = price
+#
+#     def show_info(self):
+#         """Display information about the book."""
+#         print("Book title:", self.title)
+#         print("Year of publication:", self.year)
+#         print("Publisher:", self.publisher)
+#         print("Genre:", self.genre)
+#         print("Author:", self.author)
+#         print("Price:", self.price, "UAH")
+#
+#     def change_price(self, new_price):
+#         """Change the price of the book."""
+#         self.price = new_price
+#         print("Book price has been changed.")
+#
+#     def change_genre(self, new_genre):
+#         """Change the genre of the book."""
+#         self.genre = new_genre
+#         print("Book genre has been changed.")
+#
+#
+# """Create an object of the Book class."""
+# book1 = Book("Dune", 1965, "Chilton Books", "Science Fiction",
+#              "Frank Herbert", 500)
+#
+# """Display book information."""
+# book1.show_info()
+#
+# print()
+#
+# """Change the book price."""
+# book1.change_price(550 )
+#
+# """Change the book genre."""
+# book1.change_genre("Science Fiction")
+# print()
+# """Display updated book information."""
+# book1.show_info()
 
-    def __init__(self, title, year, publisher, genre, author, price):
-        """Initialize the book attributes."""
-        self.title = title
-        self.year = year
-        self.publisher = publisher
-        self.genre = genre
-        self.author = author
-        self.price = price
-
-    def show_info(self):
-        """Display information about the book."""
-        print("Book title:", self.title)
-        print("Year of publication:", self.year)
-        print("Publisher:", self.publisher)
-        print("Genre:", self.genre)
-        print("Author:", self.author)
-        print("Price:", self.price, "UAH")
-
-    def change_price(self, new_price):
-        """Change the price of the book."""
-        self.price = new_price
-        print("Book price has been changed.")
-
-    def change_genre(self, new_genre):
-        """Change the genre of the book."""
-        self.genre = new_genre
-        print("Book genre has been changed.")
 
 
-"""Create an object of the Book class."""
-book1 = Book("Dune", 1965, "Chilton Books", "Science Fiction",
-             "Frank Herbert", 500)
+# Об'єктно-орієнтоване програмування
+# Тема: Статичні методи. Частина 3
+#
+#
+# Завдання 1
 
-"""Display book information."""
-book1.show_info()
+class Fraction:
+    """
+    A class for working with fractions.
+    """
 
-print()
+    count = 0
 
-"""Change the book price."""
-book1.change_price(550)
+    def __init__(self, numerator, denominator):
+        """
+        Initializes a fraction and increases the object counter.
+        """
+        self.numerator = numerator
+        self.denominator = denominator
+        Fraction.count += 1
 
-"""Change the book genre."""
-book1.change_genre("Science Fiction")
+    @staticmethod
+    def count_objects():
+        """
+        Returns the number of created Fraction objects.
+        """
+        return Fraction.count
 
-print()
 
-"""Display updated book information."""
-book1.show_info()
+# Create fraction objects
+fraction1 = Fraction(1, 2)
+fraction2 = Fraction(3, 4)
+fraction3 = Fraction(5, 6)
+
+# Display the number of created objects
+print("Number of created fractions:", Fraction.count_objects())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
