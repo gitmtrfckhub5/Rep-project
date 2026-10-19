@@ -644,7 +644,90 @@
 
 # Тема: Множинне успадкування. Поліморфізм. Реалізація магічних методів.
 # Завдання 1
+#
+#
+#
+# import math
+#
+#
+# class Figure:
+#     """Base class for figures."""
+#
+#     def area(self):
+#         """Calculate the area of a figure."""
+#         return 0
+#
+#     def __str__(self):
+#         """Return the area of a figure."""
+#         return "Area: " + str(round(self.area(), 2))
+#
+#
+# class Rectangle(Figure):
+#     """Class for a rectangle."""
+#
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#
+#     def area(self):
+#         """Calculate the rectangle area."""
+#         return self.width * self.height
+#
+#
+# class Circle(Figure):
+#     """Class for a circle."""
+#
+#     def __init__(self, radius):
+#         self.radius = radius
+#
+#     def area(self):
+#         """Calculate the circle area."""
+#         return math.pi * self.radius ** 2
+#
+#
+# class RightTriangle(Figure):
+#     """Class for a right triangle."""
+#
+#     def __init__(self, base, height):
+#         self.base = base
+#         self.height = height
+#
+#     def area(self):
+#         """Calculate the right triangle area."""
+#         return self.base * self.height / 2
+#
+#
+# class Trapezoid(Figure):
+#     """Class for a trapezoid."""
+#
+#     def __init__(self, base1, base2, height):
+#         self.base1 = base1
+#         self.base2 = base2
+#         self.height = height
+#
+#     def area(self):
+#         """Calculate the trapezoid area."""
+#         return (self.base1 + self.base2) * self.height / 2
+#
+#
+# """Create figure objects."""
+#
+# rectangle = Rectangle(5, 4)
+# circle = Circle(3)
+# triangle = RightTriangle(6, 4)
+# trapezoid = Trapezoid(5, 7, 4)
+#
+#
+# """Display the areas of the figures."""
+#
+# print("Rectangle:", rectangle)
+# print("Circle:", circle)
+# print("Right triangle:", triangle)
+# print("Trapezoid:", trapezoid)
+#
 
+
+# Завдання 2
 
 
 import math
@@ -657,9 +740,13 @@ class Figure:
         """Calculate the area of a figure."""
         return 0
 
+    def __int__(self):
+        """Return the area as an integer."""
+        return int(self.area())
+
     def __str__(self):
-        """Return the area of a figure."""
-        return "Area: " + str(round(self.area(), 2))
+        """Return information about the figure."""
+        return "Figure. Area: " + str(round(self.area(), 2))
 
 
 class Rectangle(Figure):
@@ -673,6 +760,11 @@ class Rectangle(Figure):
         """Calculate the rectangle area."""
         return self.width * self.height
 
+    def __str__(self):
+        return "Rectangle. Width: " + str(self.width) + \
+               ", height: " + str(self.height) + \
+               ", area: " + str(round(self.area(), 2))
+
 
 class Circle(Figure):
     """Class for a circle."""
@@ -684,6 +776,10 @@ class Circle(Figure):
         """Calculate the circle area."""
         return math.pi * self.radius ** 2
 
+    def __str__(self):
+        return "Circle. Radius: " + str(self.radius) + \
+               ", area: " + str(round(self.area(), 2))
+
 
 class RightTriangle(Figure):
     """Class for a right triangle."""
@@ -693,8 +789,13 @@ class RightTriangle(Figure):
         self.height = height
 
     def area(self):
-        """Calculate the right triangle area."""
+        """Calculate the triangle area."""
         return self.base * self.height / 2
+
+    def __str__(self):
+        return "Right triangle. Base: " + str(self.base) + \
+               ", height: " + str(self.height) + \
+               ", area: " + str(round(self.area(), 2))
 
 
 class Trapezoid(Figure):
@@ -709,6 +810,12 @@ class Trapezoid(Figure):
         """Calculate the trapezoid area."""
         return (self.base1 + self.base2) * self.height / 2
 
+    def __str__(self):
+        return "Trapezoid. Bases: " + str(self.base1) + \
+               " and " + str(self.base2) + \
+               ", height: " + str(self.height) + \
+               ", area: " + str(round(self.area(), 2))
+
 
 """Create figure objects."""
 
@@ -718,14 +825,19 @@ triangle = RightTriangle(6, 4)
 trapezoid = Trapezoid(5, 7, 4)
 
 
-"""Display the areas of the figures."""
+"""Display information about the figures."""
 
-print("Rectangle:", rectangle)
-print("Circle:", circle)
-print("Right triangle:", triangle)
-print("Trapezoid:", trapezoid)
+print(rectangle)
+print("Integer area:", int(rectangle))
+print()
 
+print(circle)
+print("Integer area:", int(circle))
+print()
 
+print(triangle)
+print("Integer area:", int(triangle))
+print()
 
-
-
+print(trapezoid)
+print("Integer area:", int(trapezoid))
