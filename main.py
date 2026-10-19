@@ -413,41 +413,138 @@
 # print("Number of calculations:", Temperature.count_calculations())
 
 # Завдання 3
-
-class LengthConverter:
-    """
-    A class for converting units of length.
-    """
-
-    @staticmethod
-    def meters_to_feet(meters):
-        """
-        Converts meters to feet.
-        """
-        return meters * 3.28084
-
-    @staticmethod
-    def feet_to_meters(feet):
-        """
-        Converts feet to meters.
-        """
-        return feet / 3.28084
-
-
-# Convert meters to feet
-meters = 10
-result1 = LengthConverter.meters_to_feet(meters)
-print(meters, "meters =", round(result1, 2), "feet")
-
-# Convert feet to meters
-feet = 20
-result2 = LengthConverter.feet_to_meters(feet)
-print(feet, "feet =", round(result2, 2), "meters")
-
-
+#
+# class LengthConverter:
+#     """
+#     A class for converting units of length.
+#     """
+#
+#     @staticmethod
+#     def meters_to_feet(meters):
+#         """
+#         Converts meters to feet.
+#         """
+#         return meters * 3.28084
+#
+#     @staticmethod
+#     def feet_to_meters(feet):
+#         """
+#         Converts feet to meters.
+#         """
+#         return feet / 3.28084
+#
+#
+# # Convert meters to feet
+# meters = 10
+# result1 = LengthConverter.meters_to_feet(meters)
+# print(meters, "meters =", round(result1, 2), "feet")
+#
+# # Convert feet to meters
+# feet = 20
+# result2 = LengthConverter.feet_to_meters(feet)
+# print(feet, "feet =", round(result2, 2), "meters")
 
 
 
+
+#Тема: Успадкування. Частина 1
+ #Завдання 1
+
+
+class Device:
+    """Class that stores information about a device."""
+
+    def __init__(self, name, brand, power):
+        """Initialize the device."""
+        self.name = name
+        self.brand = brand
+        self.power = power
+
+    def show_info(self):
+        """Display information about the device."""
+        print("Device name:", self.name)
+        print("Brand:", self.brand)
+        print("Power:", self.power, "W")
+
+
+class CoffeeMachine(Device):
+    """Class that describes a coffee machine."""
+
+    def __init__(self, name, brand, power, coffee_type):
+        """Initialize the coffee machine."""
+        super().__init__(name, brand, power)
+        self.coffee_type = coffee_type
+
+    def make_coffee(self):
+        """Make coffee."""
+        print("The coffee machine is making:", self.coffee_type)
+
+
+class Blender(Device):
+    """Class that describes a blender."""
+
+    def __init__(self, name, brand, power, speed):
+        """Initialize the blender."""
+        super().__init__(name, brand, power)
+        self.speed = speed
+
+    def blend(self):
+        """Start the blender."""
+        print("The blender is working at speed:", self.speed)
+
+
+class MeatGrinder(Device):
+    """Class that describes a meat grinder."""
+
+    def __init__(self, name, brand, power, productivity):
+        """Initialize the meat grinder."""
+        super().__init__(name, brand, power)
+        self.productivity = productivity
+
+    def grind_meat(self):
+        """Grind meat."""
+        print("The meat grinder is grinding meat.")
+        print("Productivity:", self.productivity, "kg/min")
+
+
+"""Create objects."""
+
+coffee_machine = CoffeeMachine(
+    "Coffee Machine", "Philips", 1500, "cappuccino"
+)
+
+blender = Blender(
+    "Blender", "Bosch", 800, 3
+)
+
+meat_grinder = MeatGrinder(
+    "Meat Grinder", "Moulinex", 1200, 2
+)
+
+
+"""Display information about the coffee machine."""
+
+print("Coffee Machine:")
+coffee_machine.show_info()
+coffee_machine.make_coffee()
+
+print()
+
+
+"""Display information about the blender."""
+
+print("Blender:")
+blender.show_info()
+blender.blend()
+
+print()
+
+
+"""Display information about the meat grinder."""
+
+print("Meat Grinder:")
+meat_grinder.show_info()
+meat_grinder.grind_meat()
 
 
 
