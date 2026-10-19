@@ -550,92 +550,182 @@
 #Тема: Успадкування. Частина 1
 #Завдання 2
 
+#
+# class Ship:
+#     """Class that stores information about a ship."""
+#
+#     def __init__(self, name, country, speed):
+#         """Initialize the ship."""
+#         self.name = name
+#         self.country = country
+#         self.speed = speed
+#
+#     def show_info(self):
+#         """Display information about the ship."""
+#         print("Ship name:", self.name)
+#         print("Country:", self.country)
+#         print("Speed:", self.speed, "knots")
+#
+#
+# class Frigate(Ship):
+#     """Class that describes a frigate."""
+#
+#     def __init__(self, name, country, speed, missiles):
+#         """Initialize the frigate."""
+#         super().__init__(name, country, speed)
+#         self.missiles = missiles
+#
+#     def patrol(self):
+#         """Start patrolling."""
+#         print("The frigate", self.name, "is patrolling.")
+#         print("Number of missiles:", self.missiles)
+#
+#
+# class Destroyer(Ship):
+#     """Class that describes a destroyer."""
+#
+#     def __init__(self, name, country, speed, guns):
+#         """Initialize the destroyer."""
+#         super().__init__(name, country, speed)
+#         self.guns = guns
+#
+#     def attack(self):
+#         """Show information about the destroyer's weapons."""
+#         print("The destroyer", self.name, "is ready for action.")
+#         print("Number of guns:", self.guns)
+#
+#
+# class Cruiser(Ship):
+#     """Class that describes a cruiser."""
+#
+#     def __init__(self, name, country, speed, crew):
+#         """Initialize the cruiser."""
+#         super().__init__(name, country, speed)
+#         self.crew = crew
+#
+#     def show_crew(self):
+#         """Display the number of crew members."""
+#         print("The cruiser", self.name, "has", self.crew, "crew members.")
+#
+#
+# """Create objects."""
+#
+# frigate = Frigate("Brees", "USA", 29, 16)
+# destroyer = Destroyer("Arleigh Burke", "USA", 30, 5)
+#
+# cruiser = Cruiser("Ticonderoga", "USA", 32, 400)
+#
+#
+# """Display information about the frigate."""
+#
+# print("Frigate:")
+# frigate.show_info()
+# frigate.patrol()
+#
+# print()
+#
+#
+# """Display information about the destroyer."""
+#
+# print("Destroyer:")
+# destroyer.show_info()
+# destroyer.attack()
+#
+# print()
+#
+#
+# """Display information about the cruiser."""
+#
+# print("Cruiser:")
+# cruiser.show_info()
+# cruiser.show_crew()
 
-class Ship:
-    """Class that stores information about a ship."""
-
-    def __init__(self, name, country, speed):
-        """Initialize the ship."""
-        self.name = name
-        self.country = country
-        self.speed = speed
-
-    def show_info(self):
-        """Display information about the ship."""
-        print("Ship name:", self.name)
-        print("Country:", self.country)
-        print("Speed:", self.speed, "knots")
 
 
-class Frigate(Ship):
-    """Class that describes a frigate."""
-
-    def __init__(self, name, country, speed, missiles):
-        """Initialize the frigate."""
-        super().__init__(name, country, speed)
-        self.missiles = missiles
-
-    def patrol(self):
-        """Start patrolling."""
-        print("The frigate", self.name, "is patrolling.")
-        print("Number of missiles:", self.missiles)
+# Тема: Множинне успадкування. Поліморфізм. Реалізація магічних методів.
+# Завдання 1
 
 
-class Destroyer(Ship):
-    """Class that describes a destroyer."""
 
-    def __init__(self, name, country, speed, guns):
-        """Initialize the destroyer."""
-        super().__init__(name, country, speed)
-        self.guns = guns
-
-    def attack(self):
-        """Show information about the destroyer's weapons."""
-        print("The destroyer", self.name, "is ready for action.")
-        print("Number of guns:", self.guns)
+import math
 
 
-class Cruiser(Ship):
-    """Class that describes a cruiser."""
+class Figure:
+    """Base class for figures."""
 
-    def __init__(self, name, country, speed, crew):
-        """Initialize the cruiser."""
-        super().__init__(name, country, speed)
-        self.crew = crew
+    def area(self):
+        """Calculate the area of a figure."""
+        return 0
 
-    def show_crew(self):
-        """Display the number of crew members."""
-        print("The cruiser", self.name, "has", self.crew, "crew members.")
-
-
-"""Create objects."""
-
-frigate = Frigate("Brees", "USA", 29, 16)
-destroyer = Destroyer("Arleigh Burke", "USA", 30, 5)
-
-cruiser = Cruiser("Ticonderoga", "USA", 32, 400)
+    def __str__(self):
+        """Return the area of a figure."""
+        return "Area: " + str(round(self.area(), 2))
 
 
-"""Display information about the frigate."""
+class Rectangle(Figure):
+    """Class for a rectangle."""
 
-print("Frigate:")
-frigate.show_info()
-frigate.patrol()
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
-print()
-
-
-"""Display information about the destroyer."""
-
-print("Destroyer:")
-destroyer.show_info()
-destroyer.attack()
-
-print()
+    def area(self):
+        """Calculate the rectangle area."""
+        return self.width * self.height
 
 
-"""Display information about the cruiser."""
+class Circle(Figure):
+    """Class for a circle."""
 
-print("Cruiser:")
-cruiser.show_info()
-cruiser.show_crew()
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        """Calculate the circle area."""
+        return math.pi * self.radius ** 2
+
+
+class RightTriangle(Figure):
+    """Class for a right triangle."""
+
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+
+    def area(self):
+        """Calculate the right triangle area."""
+        return self.base * self.height / 2
+
+
+class Trapezoid(Figure):
+    """Class for a trapezoid."""
+
+    def __init__(self, base1, base2, height):
+        self.base1 = base1
+        self.base2 = base2
+        self.height = height
+
+    def area(self):
+        """Calculate the trapezoid area."""
+        return (self.base1 + self.base2) * self.height / 2
+
+
+"""Create figure objects."""
+
+rectangle = Rectangle(5, 4)
+circle = Circle(3)
+triangle = RightTriangle(6, 4)
+trapezoid = Trapezoid(5, 7, 4)
+
+
+"""Display the areas of the figures."""
+
+print("Rectangle:", rectangle)
+print("Circle:", circle)
+print("Right triangle:", triangle)
+print("Trapezoid:", trapezoid)
+
+
+
+
+
