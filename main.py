@@ -449,103 +449,193 @@
 
 #Тема: Успадкування. Частина 1
  #Завдання 1
+#
+#
+# class Device:
+#     """Class that stores information about a device."""
+#
+#     def __init__(self, name, brand, power):
+#         """Initialize the device."""
+#         self.name = name
+#         self.brand = brand
+#         self.power = power
+#
+#     def show_info(self):
+#         """Display information about the device."""
+#         print("Device name:", self.name)
+#         print("Brand:", self.brand)
+#         print("Power:", self.power, "W")
+#
+#
+# class CoffeeMachine(Device):
+#     """Class that describes a coffee machine."""
+#
+#     def __init__(self, name, brand, power, coffee_type):
+#         """Initialize the coffee machine."""
+#         super().__init__(name, brand, power)
+#         self.coffee_type = coffee_type
+#
+#     def make_coffee(self):
+#         """Make coffee."""
+#         print("The coffee machine is making:", self.coffee_type)
+#
+#
+# class Blender(Device):
+#     """Class that describes a blender."""
+#
+#     def __init__(self, name, brand, power, speed):
+#         """Initialize the blender."""
+#         super().__init__(name, brand, power)
+#         self.speed = speed
+#
+#     def blend(self):
+#         """Start the blender."""
+#         print("The blender is working at speed:", self.speed)
+#
+#
+# class MeatGrinder(Device):
+#     """Class that describes a meat grinder."""
+#
+#     def __init__(self, name, brand, power, productivity):
+#         """Initialize the meat grinder."""
+#         super().__init__(name, brand, power)
+#         self.productivity = productivity
+#
+#     def grind_meat(self):
+#         """Grind meat."""
+#         print("The meat grinder is grinding meat.")
+#         print("Productivity:", self.productivity, "kg/min")
+#
+#
+# """Create objects."""
+#
+# coffee_machine = CoffeeMachine(
+#     "Coffee Machine", "Philips", 1500, "cappuccino"
+# )
+#
+# blender = Blender(
+#     "Blender", "Bosch", 800, 3
+# )
+#
+# meat_grinder = MeatGrinder(
+#     "Meat Grinder", "Moulinex", 1200, 2
+# )
+#
+#
+# """Display information about the coffee machine."""
+#
+# print("Coffee Machine:")
+# coffee_machine.show_info()
+# coffee_machine.make_coffee()
+#
+# print()
+#
+#
+# """Display information about the blender."""
+#
+# print("Blender:")
+# blender.show_info()
+# blender.blend()
+#
+# print()
+#
+#
+# """Display information about the meat grinder."""
+#
+# print("Meat Grinder:")
+# meat_grinder.show_info()
+# meat_grinder.grind_meat()
 
 
-class Device:
-    """Class that stores information about a device."""
+#Тема: Успадкування. Частина 1
+#Завдання 2
 
-    def __init__(self, name, brand, power):
-        """Initialize the device."""
+
+class Ship:
+    """Class that stores information about a ship."""
+
+    def __init__(self, name, country, speed):
+        """Initialize the ship."""
         self.name = name
-        self.brand = brand
-        self.power = power
-
-    def show_info(self):
-        """Display information about the device."""
-        print("Device name:", self.name)
-        print("Brand:", self.brand)
-        print("Power:", self.power, "W")
-
-
-class CoffeeMachine(Device):
-    """Class that describes a coffee machine."""
-
-    def __init__(self, name, brand, power, coffee_type):
-        """Initialize the coffee machine."""
-        super().__init__(name, brand, power)
-        self.coffee_type = coffee_type
-
-    def make_coffee(self):
-        """Make coffee."""
-        print("The coffee machine is making:", self.coffee_type)
-
-
-class Blender(Device):
-    """Class that describes a blender."""
-
-    def __init__(self, name, brand, power, speed):
-        """Initialize the blender."""
-        super().__init__(name, brand, power)
+        self.country = country
         self.speed = speed
 
-    def blend(self):
-        """Start the blender."""
-        print("The blender is working at speed:", self.speed)
+    def show_info(self):
+        """Display information about the ship."""
+        print("Ship name:", self.name)
+        print("Country:", self.country)
+        print("Speed:", self.speed, "knots")
 
 
-class MeatGrinder(Device):
-    """Class that describes a meat grinder."""
+class Frigate(Ship):
+    """Class that describes a frigate."""
 
-    def __init__(self, name, brand, power, productivity):
-        """Initialize the meat grinder."""
-        super().__init__(name, brand, power)
-        self.productivity = productivity
+    def __init__(self, name, country, speed, missiles):
+        """Initialize the frigate."""
+        super().__init__(name, country, speed)
+        self.missiles = missiles
 
-    def grind_meat(self):
-        """Grind meat."""
-        print("The meat grinder is grinding meat.")
-        print("Productivity:", self.productivity, "kg/min")
+    def patrol(self):
+        """Start patrolling."""
+        print("The frigate", self.name, "is patrolling.")
+        print("Number of missiles:", self.missiles)
+
+
+class Destroyer(Ship):
+    """Class that describes a destroyer."""
+
+    def __init__(self, name, country, speed, guns):
+        """Initialize the destroyer."""
+        super().__init__(name, country, speed)
+        self.guns = guns
+
+    def attack(self):
+        """Show information about the destroyer's weapons."""
+        print("The destroyer", self.name, "is ready for action.")
+        print("Number of guns:", self.guns)
+
+
+class Cruiser(Ship):
+    """Class that describes a cruiser."""
+
+    def __init__(self, name, country, speed, crew):
+        """Initialize the cruiser."""
+        super().__init__(name, country, speed)
+        self.crew = crew
+
+    def show_crew(self):
+        """Display the number of crew members."""
+        print("The cruiser", self.name, "has", self.crew, "crew members.")
 
 
 """Create objects."""
 
-coffee_machine = CoffeeMachine(
-    "Coffee Machine", "Philips", 1500, "cappuccino"
-)
+frigate = Frigate("Brees", "USA", 29, 16)
+destroyer = Destroyer("Arleigh Burke", "USA", 30, 5)
 
-blender = Blender(
-    "Blender", "Bosch", 800, 3
-)
-
-meat_grinder = MeatGrinder(
-    "Meat Grinder", "Moulinex", 1200, 2
-)
+cruiser = Cruiser("Ticonderoga", "USA", 32, 400)
 
 
-"""Display information about the coffee machine."""
+"""Display information about the frigate."""
 
-print("Coffee Machine:")
-coffee_machine.show_info()
-coffee_machine.make_coffee()
+print("Frigate:")
+frigate.show_info()
+frigate.patrol()
 
 print()
 
 
-"""Display information about the blender."""
+"""Display information about the destroyer."""
 
-print("Blender:")
-blender.show_info()
-blender.blend()
+print("Destroyer:")
+destroyer.show_info()
+destroyer.attack()
 
 print()
 
 
-"""Display information about the meat grinder."""
+"""Display information about the cruiser."""
 
-print("Meat Grinder:")
-meat_grinder.show_info()
-meat_grinder.grind_meat()
-
-
-
-
+print("Cruiser:")
+cruiser.show_info()
+cruiser.show_crew()
