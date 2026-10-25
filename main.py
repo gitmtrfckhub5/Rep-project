@@ -947,58 +947,121 @@
 #
 # Завдання 1
 
+#
+# class Car:
+#     """Constructor of the Car class."""
+#     def __init__(self, model, year, manufacturer, engine, color, price):
+#         self.model = model
+#         self.year = year
+#         self.manufacturer = manufacturer
+#         self.engine = engine
+#         self.color = color
+#         self.price = price
+#
+#     """Method to display car information."""
+#     def show_info(self):
+#         print("Car model:", self.model)
+#         print("Year:", self.year)
+#         print("Manufacturer:", self.manufacturer)
+#         print("Engine volume:", self.engine, "L")
+#         print("Color:", self.color)
+#         print("Price:", self.price, "UAH")
+#
+#     """Method to change the price."""
+#     def change_price(self, new_price=None):
+#         if new_price is not None:
+#             self.price = new_price
+#         print("Price:", self.price, "UAH")
+#
+#     """Method to change the color."""
+#     def change_color(self, new_color=None):
+#         if new_color is not None:
+#             self.color = new_color
+#         print("Color:", self.color)
+#
+#
+# # Create a car object
+# car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
+#
+# # Display car information
+# car1.show_info()
+#
+# print()
+#
+# # Change price and color
+# car1.change_price(1400000)
+# car1.change_color("White")
+#
+# print()
+#
+# # Display updated information
+# car1.show_info()
+#
+# print()
+#
+# # Call methods without arguments
+# car1.change_price()
+# car1.change_color()
 
-class Car:
-    """Constructor of the Car class."""
-    def __init__(self, model, year, manufacturer, engine, color, price):
-        self.model = model
+
+# Завдання 2
+
+
+
+class Book:
+    """Class that stores information about a book."""
+
+    def __init__(self, title, year, publisher, genre, author, price):
+        """Initialize the book attributes."""
+        self.title = title
         self.year = year
-        self.manufacturer = manufacturer
-        self.engine = engine
-        self.color = color
+        self.publisher = publisher
+        self.genre = genre
+        self.author = author
         self.price = price
 
-    """Method to display car information."""
+    """Display information about the book."""
     def show_info(self):
-        print("Car model:", self.model)
-        print("Year:", self.year)
-        print("Manufacturer:", self.manufacturer)
-        print("Engine volume:", self.engine, "L")
-        print("Color:", self.color)
+        print("Book title:", self.title)
+        print("Year of publication:", self.year)
+        print("Publisher:", self.publisher)
+        print("Genre:", self.genre)
+        print("Author:", self.author)
         print("Price:", self.price, "UAH")
 
-    """Method to change the price."""
+    """Change the price of the book."""
     def change_price(self, new_price=None):
         if new_price is not None:
             self.price = new_price
         print("Price:", self.price, "UAH")
 
-    """Method to change the color."""
-    def change_color(self, new_color=None):
-        if new_color is not None:
-            self.color = new_color
-        print("Color:", self.color)
+    """Change the genre of the book."""
+    def change_genre(self, new_genre=None):
+        if new_genre is not None:
+            self.genre = new_genre
+        print("Genre:", self.genre)
 
 
-# Create a car object
-car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
+"""Create a book object."""
+book1 = Book("Dune", 1965, "Chilton Books",
+             "Science Fiction", "Frank Herbert", 500)
 
-# Display car information
-car1.show_info()
-
-print()
-
-# Change price and color
-car1.change_price(1400000)
-car1.change_color("White")
+"""Display book information."""
+book1.show_info()
 
 print()
 
-# Display updated information
-car1.show_info()
+"""Change the book price and genre."""
+book1.change_price(550)
+book1.change_genre("Adventure")
 
 print()
 
-# Call methods without arguments
-car1.change_price()
-car1.change_color()
+"""Display updated book information."""
+book1.show_info()
+
+print()
+
+"""Call methods without arguments."""
+book1.change_price()
+book1.change_genre()
