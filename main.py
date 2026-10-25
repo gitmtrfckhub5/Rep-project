@@ -845,18 +845,64 @@
 
 # Тема: Декоратори
 # Завдання 1
+#
+#
+#
+# import time
+#
+#
+# """Decorator for measuring the execution time of a function."""
+# def timer(func):
+#     def wrapper():
+#         start = time.time()
+#
+#         result = func()
+#
+#         end = time.time()
+#         print("Execution time:", round(end - start, 5), "seconds")
+#
+#         return result
+#     return wrapper
+#
+#
+# """Function for finding all prime numbers from 0 to 1000."""
+# @timer
+# def find_primes():
+#     primes = []
+#
+#     for num in range(2, 1001):
+#         is_prime = True
+#
+#         for i in range(2, num):
+#             if num % i == 0:
+#                 is_prime = False
+#                 break
+#
+#         if is_prime:
+#             primes.append(num)
+#
+#     return primes
+#
+#
+# """Call the function and print the prime numbers."""
+# numbers = find_primes()
+#
+# print("Prime numbers from 0 to 1000:")
+# print(numbers)
 
 
+
+# Завдання 2
 
 import time
 
 
 """Decorator for measuring the execution time of a function."""
 def timer(func):
-    def wrapper():
+    def wrapper(start_num, end_num):
         start = time.time()
 
-        result = func()
+        result = func(start_num, end_num)
 
         end = time.time()
         print("Execution time:", round(end - start, 5), "seconds")
@@ -865,12 +911,12 @@ def timer(func):
     return wrapper
 
 
-"""Function for finding all prime numbers from 0 to 1000."""
+"""Function for finding prime numbers in a given range."""
 @timer
-def find_primes():
+def find_primes(start_num, end_num):
     primes = []
 
-    for num in range(2, 1001):
+    for num in range(max(2, start_num), end_num + 1):
         is_prime = True
 
         for i in range(2, num):
@@ -884,8 +930,13 @@ def find_primes():
     return primes
 
 
-"""Call the function and print the prime numbers."""
-numbers = find_primes()
+"""Ask the user for the range boundaries."""
+start_num = int(input("Enter the start of the range: "))
+end_num = int(input("Enter the end of the range: "))
 
-print("Prime numbers from 0 to 1000:")
+
+"""Call the function and print the prime numbers."""
+numbers = find_primes(start_num, end_num)
+
+print("Prime numbers:")
 print(numbers)
