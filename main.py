@@ -1148,4 +1148,3 @@ circle1.show_info()
 
 circle1 -= 2
 circle1.show_info()
-
