@@ -894,49 +894,111 @@
 
 # Завдання 2
 
-import time
+# import time
+#
+#
+# """Decorator for measuring the execution time of a function."""
+# def timer(func):
+#     def wrapper(start_num, end_num):
+#         start = time.time()
+#
+#         result = func(start_num, end_num)
+#
+#         end = time.time()
+#         print("Execution time:", round(end - start, 5), "seconds")
+#
+#         return result
+#     return wrapper
+#
+#
+# """Function for finding prime numbers in a given range."""
+# @timer
+# def find_primes(start_num, end_num):
+#     primes = []
+#
+#     for num in range(max(2, start_num), end_num + 1):
+#         is_prime = True
+#
+#         for i in range(2, num):
+#             if num % i == 0:
+#                 is_prime = False
+#                 break
+#
+#         if is_prime:
+#             primes.append(num)
+#
+#     return primes
+#
+#
+# """Ask the user for the range boundaries."""
+# start_num = int(input("Enter the start of the range: "))
+# end_num = int(input("Enter the end of the range: "))
+#
+#
+# """Call the function and print the prime numbers."""
+# numbers = find_primes(start_num, end_num)
+#
+# print("Prime numbers:")
+# print(numbers)
 
 
-"""Decorator for measuring the execution time of a function."""
-def timer(func):
-    def wrapper(start_num, end_num):
-        start = time.time()
-
-        result = func(start_num, end_num)
-
-        end = time.time()
-        print("Execution time:", round(end - start, 5), "seconds")
-
-        return result
-    return wrapper
+# Тема: Класи. Об'єкти. Конструктори. Перевантаження методів.
+#
+#
+# Завдання 1
 
 
-"""Function for finding prime numbers in a given range."""
-@timer
-def find_primes(start_num, end_num):
-    primes = []
+class Car:
+    """Constructor of the Car class."""
+    def __init__(self, model, year, manufacturer, engine, color, price):
+        self.model = model
+        self.year = year
+        self.manufacturer = manufacturer
+        self.engine = engine
+        self.color = color
+        self.price = price
 
-    for num in range(max(2, start_num), end_num + 1):
-        is_prime = True
+    """Method to display car information."""
+    def show_info(self):
+        print("Car model:", self.model)
+        print("Year:", self.year)
+        print("Manufacturer:", self.manufacturer)
+        print("Engine volume:", self.engine, "L")
+        print("Color:", self.color)
+        print("Price:", self.price, "UAH")
 
-        for i in range(2, num):
-            if num % i == 0:
-                is_prime = False
-                break
+    """Method to change the price."""
+    def change_price(self, new_price=None):
+        if new_price is not None:
+            self.price = new_price
+        print("Price:", self.price, "UAH")
 
-        if is_prime:
-            primes.append(num)
-
-    return primes
-
-
-"""Ask the user for the range boundaries."""
-start_num = int(input("Enter the start of the range: "))
-end_num = int(input("Enter the end of the range: "))
+    """Method to change the color."""
+    def change_color(self, new_color=None):
+        if new_color is not None:
+            self.color = new_color
+        print("Color:", self.color)
 
 
-"""Call the function and print the prime numbers."""
-numbers = find_primes(start_num, end_num)
+# Create a car object
+car1 = Car("BMW X5", 2020, "BMW", 3.0, "Black", 1500000)
 
-print("Prime numbers:")
-print(numbers)
+# Display car information
+car1.show_info()
+
+print()
+
+# Change price and color
+car1.change_price(1400000)
+car1.change_color("White")
+
+print()
+
+# Display updated information
+car1.show_info()
+
+print()
+
+# Call methods without arguments
+car1.change_price()
+car1.change_color()
