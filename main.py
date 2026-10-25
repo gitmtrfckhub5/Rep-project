@@ -1005,63 +1005,146 @@
 
 
 # Завдання 2
+#
+#
+#
+# class Book:
+#     """Class that stores information about a book."""
+#
+#     def __init__(self, title, year, publisher, genre, author, price):
+#         """Initialize the book attributes."""
+#         self.title = title
+#         self.year = year
+#         self.publisher = publisher
+#         self.genre = genre
+#         self.author = author
+#         self.price = price
+#
+#     """Display information about the book."""
+#     def show_info(self):
+#         print("Book title:", self.title)
+#         print("Year of publication:", self.year)
+#         print("Publisher:", self.publisher)
+#         print("Genre:", self.genre)
+#         print("Author:", self.author)
+#         print("Price:", self.price, "UAH")
+#
+#     """Change the price of the book."""
+#     def change_price(self, new_price=None):
+#         if new_price is not None:
+#             self.price = new_price
+#         print("Price:", self.price, "UAH")
+#
+#     """Change the genre of the book."""
+#     def change_genre(self, new_genre=None):
+#         if new_genre is not None:
+#             self.genre = new_genre
+#         print("Genre:", self.genre)
+#
+#
+# """Create a book object."""
+# book1 = Book("Dune", 1965, "Chilton Books",
+#              "Science Fiction", "Frank Herbert", 500)
+#
+# """Display book information."""
+# book1.show_info()
+#
+# print()
+#
+# """Change the book price and genre."""
+# book1.change_price(550)
+# book1.change_genre("Adventure")
+#
+# print()
+#
+# """Display updated book information."""
+# book1.show_info()
+#
+# print()
+#
+# """Call methods without arguments."""
+# book1.change_price()
+# book1.change_genre()
 
 
+# Тема: Перевантаження операторів.
 
-class Book:
-    """Class that stores information about a book."""
 
-    def __init__(self, title, year, publisher, genre, author, price):
-        """Initialize the book attributes."""
-        self.title = title
-        self.year = year
-        self.publisher = publisher
-        self.genre = genre
-        self.author = author
-        self.price = price
+# Завдання 1
 
-    """Display information about the book."""
+
+class Circle:
+    """Class that stores information about a circle."""
+
+    def __init__(self, radius):
+        """Initialize the circle radius."""
+        self.radius = radius
+
+    """Compare two circles by radius."""
+    def __eq__(self, other):
+        return self.radius == other.radius
+
+    """Compare two circles by circumference."""
+    def __gt__(self, other):
+        return self.radius > other.radius
+
+    def __lt__(self, other):
+        return self.radius < other.radius
+
+    def __le__(self, other):
+        return self.radius <= other.radius
+
+    def __ge__(self, other):
+        return self.radius >= other.radius
+
+    """Increase the circle radius."""
+    def __add__(self, value):
+        return Circle(self.radius + value)
+
+    """Decrease the circle radius."""
+    def __sub__(self, value):
+        return Circle(self.radius - value)
+
+    """Increase the radius of the current circle."""
+    def __iadd__(self, value):
+        self.radius += value
+        return self
+
+    """Decrease the radius of the current circle."""
+    def __isub__(self, value):
+        self.radius -= value
+        return self
+
+    """Display the circle radius."""
     def show_info(self):
-        print("Book title:", self.title)
-        print("Year of publication:", self.year)
-        print("Publisher:", self.publisher)
-        print("Genre:", self.genre)
-        print("Author:", self.author)
-        print("Price:", self.price, "UAH")
-
-    """Change the price of the book."""
-    def change_price(self, new_price=None):
-        if new_price is not None:
-            self.price = new_price
-        print("Price:", self.price, "UAH")
-
-    """Change the genre of the book."""
-    def change_genre(self, new_genre=None):
-        if new_genre is not None:
-            self.genre = new_genre
-        print("Genre:", self.genre)
+        print("Circle radius:", self.radius)
 
 
-"""Create a book object."""
-book1 = Book("Dune", 1965, "Chilton Books",
-             "Science Fiction", "Frank Herbert", 500)
+"""Create two circle objects."""
+circle1 = Circle(5)
+circle2 = Circle(3)
 
-"""Display book information."""
-book1.show_info()
+"""Compare the circles."""
+print("Circles are equal:", circle1 == circle2)
+print("Circle1 > Circle2:", circle1 > circle2)
+print("Circle1 < Circle2:", circle1 < circle2)
+print("Circle1 <= Circle2:", circle1 <= circle2)
+print("Circle1 >= Circle2:", circle1 >= circle2)
 
 print()
 
-"""Change the book price and genre."""
-book1.change_price(550)
-book1.change_genre("Adventure")
+"""Change the radius using plus and minus operators."""
+circle3 = circle1 + 2
+circle4 = circle1 - 1
+
+circle3.show_info()
+circle4.show_info()
 
 print()
 
-"""Display updated book information."""
-book1.show_info()
+"""Change the radius using += and -= operators."""
+circle1 += 3
+circle1.show_info()
 
-print()
-
-"""Call methods without arguments."""
-book1.change_price()
-book1.change_genre()
+circle1 -= 2
+circle1.show_info()
