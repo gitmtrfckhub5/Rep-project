@@ -1071,80 +1071,154 @@
 
 
 # Завдання 1
+#
+#
+# class Circle:
+#     """Class that stores information about a circle."""
+#
+#     def __init__(self, radius):
+#         """Initialize the circle radius."""
+#         self.radius = radius
+#
+#     """Compare two circles by radius."""
+#     def __eq__(self, other):
+#         return self.radius == other.radius
+#
+#     """Compare two circles by circumference."""
+#     def __gt__(self, other):
+#         return self.radius > other.radius
+#
+#     def __lt__(self, other):
+#         return self.radius < other.radius
+#
+#     def __le__(self, other):
+#         return self.radius <= other.radius
+#
+#     def __ge__(self, other):
+#         return self.radius >= other.radius
+#
+#     """Increase the circle radius."""
+#     def __add__(self, value):
+#         return Circle(self.radius + value)
+#
+#     """Decrease the circle radius."""
+#     def __sub__(self, value):
+#         return Circle(self.radius - value)
+#
+#     """Increase the radius of the current circle."""
+#     def __iadd__(self, value):
+#         self.radius += value
+#         return self
+#
+#     """Decrease the radius of the current circle."""
+#     def __isub__(self, value):
+#         self.radius -= value
+#         return self
+#
+#     """Display the circle radius."""
+#     def show_info(self):
+#         print("Circle radius:", self.radius)
+#
+#
+# """Create two circle objects."""
+# circle1 = Circle(5)
+# circle2 = Circle(3)
+#
+# """Compare the circles."""
+# print("Circles are equal:", circle1 == circle2)
+# print("Circle1 > Circle2:", circle1 > circle2)
+# print("Circle1 < Circle2:", circle1 < circle2)
+# print("Circle1 <= Circle2:", circle1 <= circle2)
+# print("Circle1 >= Circle2:", circle1 >= circle2)
+#
+# print()
+#
+# """Change the radius using plus and minus operators."""
+# circle3 = circle1 + 2
+# circle4 = circle1 - 1
+#
+# circle3.show_info()
+# circle4.show_info()
+#
+# print()
+#
+# """Change the radius using += and -= operators."""
+# circle1 += 3
+# circle1.show_info()
+#
+# circle1 -= 2
+# circle1.show_info()
 
 
-class Circle:
-    """Class that stores information about a circle."""
+# Завдання 2
 
-    def __init__(self, radius):
-        """Initialize the circle radius."""
-        self.radius = radius
+class Complex:
+    """Class for working with complex numbers."""
 
-    """Compare two circles by radius."""
-    def __eq__(self, other):
-        return self.radius == other.radius
+    """Constructor of the Complex class."""
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
 
-    """Compare two circles by circumference."""
-    def __gt__(self, other):
-        return self.radius > other.radius
+    """Addition of two complex numbers."""
+    def __add__(self, other):
+        return Complex(
+            self.real + other.real,
+            self.imag + other.imag
+        )
 
-    def __lt__(self, other):
-        return self.radius < other.radius
+    """Subtraction of two complex numbers."""
+    def __sub__(self, other):
+        return Complex(
+            self.real - other.real,
+            self.imag - other.imag
+        )
 
-    def __le__(self, other):
-        return self.radius <= other.radius
+    """Multiplication of two complex numbers."""
+    def __mul__(self, other):
+        real = self.real * other.real - self.imag * other.imag
+        imag = self.real * other.imag + self.imag * other.real
+        return Complex(real, imag)
 
-    def __ge__(self, other):
-        return self.radius >= other.radius
+    """Division of two complex numbers."""
+    def __truediv__(self, other):
+        denominator = other.real ** 2 + other.imag ** 2
 
-    """Increase the circle radius."""
-    def __add__(self, value):
-        return Circle(self.radius + value)
+        if denominator == 0:
+            print("Division by zero is not allowed.")
+            return None
 
-    """Decrease the circle radius."""
-    def __sub__(self, value):
-        return Circle(self.radius - value)
+        real = (self.real * other.real +
+                self.imag * other.imag) / denominator
 
-    """Increase the radius of the current circle."""
-    def __iadd__(self, value):
-        self.radius += value
-        return self
+        imag = (self.imag * other.real -
+                self.real * other.imag) / denominator
 
-    """Decrease the radius of the current circle."""
-    def __isub__(self, value):
-        self.radius -= value
-        return self
+        return Complex(real, imag)
 
-    """Display the circle radius."""
+    """Display the complex number."""
     def show_info(self):
-        print("Circle radius:", self.radius)
+        print(f"{self.real} + ({self.imag})i")
 
 
-"""Create two circle objects."""
-circle1 = Circle(5)
-circle2 = Circle(3)
+"""Create two complex numbers."""
+num1 = Complex(4, 3)
+num2 = Complex(2, 1)
 
-"""Compare the circles."""
-print("Circles are equal:", circle1 == circle2)
-print("Circle1 > Circle2:", circle1 > circle2)
-print("Circle1 < Circle2:", circle1 < circle2)
-print("Circle1 <= Circle2:", circle1 <= circle2)
-print("Circle1 >= Circle2:", circle1 >= circle2)
+"""Perform arithmetic operations."""
+result = num1 + num2
+print("Addition:")
+result.show_info()
 
-print()
+result = num1 - num2
+print("Subtraction:")
+result.show_info()
 
-"""Change the radius using plus and minus operators."""
-circle3 = circle1 + 2
-circle4 = circle1 - 1
+result = num1 * num2
+print("Multiplication:")
+result.show_info()
 
-circle3.show_info()
-circle4.show_info()
-
-print()
-
-"""Change the radius using += and -= operators."""
-circle1 += 3
-circle1.show_info()
-
-circle1 -= 2
-circle1.show_info()
+result = num1 / num2
+print("Division:")
+if result is not None:
+    result.show_info()
