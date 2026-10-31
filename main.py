@@ -1151,74 +1151,194 @@
 
 
 # Завдання 2
+#
+# class Complex:
+#     """Class for working with complex numbers."""
+#
+#     """Constructor of the Complex class."""
+#     def __init__(self, real, imag):
+#         self.real = real
+#         self.imag = imag
+#
+#     """Addition of two complex numbers."""
+#     def __add__(self, other):
+#         return Complex(
+#             self.real + other.real,
+#             self.imag + other.imag
+#         )
+#
+#     """Subtraction of two complex numbers."""
+#     def __sub__(self, other):
+#         return Complex(
+#             self.real - other.real,
+#             self.imag - other.imag
+#         )
+#
+#     """Multiplication of two complex numbers."""
+#     def __mul__(self, other):
+#         real = self.real * other.real - self.imag * other.imag
+#         imag = self.real * other.imag + self.imag * other.real
+#         return Complex(real, imag)
+#
+#     """Division of two complex numbers."""
+#     def __truediv__(self, other):
+#         denominator = other.real ** 2 + other.imag ** 2
+#
+#         if denominator == 0:
+#             print("Division by zero is not allowed.")
+#             return None
+#
+#         real = (self.real * other.real +
+#                 self.imag * other.imag) / denominator
+#
+#         imag = (self.imag * other.real -
+#                 self.real * other.imag) / denominator
+#
+#         return Complex(real, imag)
+#
+#     """Display the complex number."""
+#     def show_info(self):
+#         print(f"{self.real} + ({self.imag})i")
+#
+#
+# """Create two complex numbers."""
+# num1 = Complex(4, 3)
+# num2 = Complex(2, 1)
+#
+# """Perform arithmetic operations."""
+# result = num1 + num2
+# print("Addition:")
+# result.show_info()
+#
+# result = num1 - num2
+# print("Subtraction:")
+# result.show_info()
+#
+# result = num1 * num2
+# print("Multiplication:")
+# result.show_info()
+#
+# result = num1 / num2
+# print("Division:")
+# if result is not None:
+#     result.show_info()
 
-class Complex:
-    """Class for working with complex numbers."""
-
-    """Constructor of the Complex class."""
-    def __init__(self, real, imag):
-        self.real = real
-        self.imag = imag
-
-    """Addition of two complex numbers."""
-    def __add__(self, other):
-        return Complex(
-            self.real + other.real,
-            self.imag + other.imag
-        )
-
-    """Subtraction of two complex numbers."""
-    def __sub__(self, other):
-        return Complex(
-            self.real - other.real,
-            self.imag - other.imag
-        )
-
-    """Multiplication of two complex numbers."""
-    def __mul__(self, other):
-        real = self.real * other.real - self.imag * other.imag
-        imag = self.real * other.imag + self.imag * other.real
-        return Complex(real, imag)
-
-    """Division of two complex numbers."""
-    def __truediv__(self, other):
-        denominator = other.real ** 2 + other.imag ** 2
-
-        if denominator == 0:
-            print("Division by zero is not allowed.")
-            return None
-
-        real = (self.real * other.real +
-                self.imag * other.imag) / denominator
-
-        imag = (self.imag * other.real -
-                self.real * other.imag) / denominator
-
-        return Complex(real, imag)
-
-    """Display the complex number."""
-    def show_info(self):
-        print(f"{self.real} + ({self.imag})i")
 
 
-"""Create two complex numbers."""
-num1 = Complex(4, 3)
-num2 = Complex(2, 1)
 
-"""Perform arithmetic operations."""
-result = num1 + num2
-print("Addition:")
-result.show_info()
+class BankAccount:
+    """This class describes a bank account."""
 
-result = num1 - num2
-print("Subtraction:")
-result.show_info()
+    def __init__(self, owner, balance):
+        """Create a new bank account."""
+        self.owner = owner
+        self.__balance = balance
 
-result = num1 * num2
-print("Multiplication:")
-result.show_info()
+    @property
+    def balance(self):
+        """Return the current balance."""
+        return self.__balance
 
-result = num1 / num2
-print("Division:")
-if result is not None:
-    result.show_info()
+    def deposit(self, amount):
+        """Add money to the account."""
+        if amount > 0:
+            self.__balance += amount
+            print("Money successfully deposited")
+        else:
+            print("Amount must be greater than zero")
+
+    def withdraw(self, amount):
+        """Withdraw money from the account."""
+        if amount > 0 and amount <= self.__balance:
+            self.__balance -= amount
+            print("Money successfully withdrawn")
+        else:
+            print("Not enough money or incorrect amount")
+
+    def change_balance(self, amount):
+        """Change the account balance."""
+        self.__balance += amount
+
+    def __str__(self):
+        """Return information about the account."""
+        return f"Owner: {self.owner}, Balance: {self.balance}"
+
+
+class SavingsAccount(BankAccount):
+    """This class describes a savings account."""
+
+    def __init__(self, owner, balance, interest_rate):
+        """Create a savings account."""
+        super().__init__(owner, balance)
+        self.interest_rate = interest_rate
+
+    def add_interest(self):
+        """Add interest to the account balance."""
+        interest = self.balance * self.interest_rate / 100
+        self.change_balance(interest)
+        print(f"Interest added: {interest}")
+
+    def withdraw(self, amount):
+        """Withdraw money from a savings account."""
+        if amount > 0 and amount <= self.balance:
+            self.change_balance(-amount)
+            print("Money withdrawn from savings account")
+        else:
+            print("Not enough money")
+
+    def __str__(self):
+        """Return information about the savings account."""
+        return (f"Savings Account. Owner: {self.owner}, "
+                f"Balance: {self.balance}, Interest: {self.interest_rate}%")
+
+
+class BusinessAccount(BankAccount):
+    """This class describes a business account."""
+
+    def __init__(self, owner, balance, commission):
+        """Create a business account."""
+        super().__init__(owner, balance)
+        self.commission = commission
+
+    def withdraw(self, amount):
+        """Withdraw money with a commission."""
+        total = amount + self.commission
+
+        if amount > 0 and total <= self.balance:
+            self.change_balance(-total)
+            print(f"Money withdrawn. Commission: {self.commission}")
+        else:
+            print("Not enough money including commission")
+
+    def __str__(self):
+        """Return information about the business account."""
+        return (f"Business Account. Owner: {self.owner}, "
+                f"Balance: {self.balance}, Commission: {self.commission}")
+
+
+# Testing the program
+
+account1 = BankAccount("David", 1000)
+print(account1)
+
+account1.deposit(500)
+account1.withdraw(200)
+print(account1)
+
+print("-------------------------")
+
+account2 = SavingsAccount("Anna", 2000, 5)
+print(account2)
+
+account2.add_interest()
+account2.withdraw(300)
+print(account2)
+
+print("-------------------------")
+
+account3 = BusinessAccount("Denis", 5000, 50)
+print(account3)
+
+account3.deposit(1000)
+account3.withdraw(500)
+print(account3)
