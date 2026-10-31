@@ -1345,138 +1345,284 @@
 
 
 # Завдання 2. Система обліку працівників
+#
+#
+# class Employee:
+#     """This class describes a company employee."""
+#
+#     def __init__(self, name, employee_id, base_salary):
+#         """Create a new employee."""
+#         self.name = name
+#         self.employee_id = employee_id
+#         self.base_salary = base_salary
+#
+#     def __calculate_bonus(self, percent):
+#         """Calculate employee bonus."""
+#         bonus = self.base_salary * percent / 100
+#         return bonus
+#
+#     def calculate_salary(self):
+#         """Calculate total salary."""
+#         return self.base_salary + self.__calculate_bonus(5)
+#
+#     def get_info(self):
+#         """Return employee information."""
+#         return (f"Name: {self.name}, "
+#                 f"ID: {self.employee_id}, "
+#                 f"Salary: {self.calculate_salary()}")
+#
+#     @staticmethod
+#     def check_id(employee_id):
+#         """Check if employee ID is correct."""
+#         return employee_id.isdigit() and len(employee_id) == 4
+#
+#     @classmethod
+#     def from_string(cls, data):
+#         """Create employee from a string."""
+#         name, employee_id, salary = data.split(",")
+#         return cls(name, employee_id, float(salary))
+#
+#
+# # Developer class
+# class Developer(Employee):
+#     """This class describes a developer."""
+#
+#     def __init__(self, name, employee_id, base_salary, projects):
+#         super().__init__(name, employee_id, base_salary)
+#         self.projects = projects
+#
+#     def calculate_salary(self):
+#         """Calculate developer salary."""
+#         bonus = self.base_salary * 10 / 100
+#         return self.base_salary + bonus + self.projects * 100
+#
+#
+# # Manager class
+# class Manager(Employee):
+#     """This class describes a manager."""
+#
+#     def __init__(self, name, employee_id, base_salary, team_size):
+#         super().__init__(name, employee_id, base_salary)
+#         self.team_size = team_size
+#
+#     def calculate_salary(self):
+#         """Calculate manager salary."""
+#         bonus = self.base_salary * 15 / 100
+#         return self.base_salary + bonus + self.team_size * 200
+#
+#
+# # Designer class
+# class Designer(Employee):
+#     """This class describes a designer."""
+#
+#     def __init__(self, name, employee_id, base_salary, experience):
+#         super().__init__(name, employee_id, base_salary)
+#         self.experience = experience
+#
+#     def calculate_salary(self):
+#         """Calculate designer salary."""
+#         bonus = self.base_salary * 8 / 100
+#         return self.base_salary + bonus + self.experience * 150
+#
+#
+# # TeamLead class
+# class TeamLead(Developer, Manager):
+#     """This class describes a team leader."""
+#
+#     def __init__(self, name, employee_id, base_salary,
+#                  projects, team_size):
+#         Employee.__init__(self, name, employee_id, base_salary)
+#         self.projects = projects
+#         self.team_size = team_size
+#
+#     def calculate_salary(self):
+#         """Calculate team leader salary."""
+#         bonus = self.base_salary * 20 / 100
+#         return (self.base_salary + bonus
+#                 + self.projects * 100
+#                 + self.team_size * 200)
+#
+#
+# # Testing the program
+#
+# employee1 = Developer("Alex", "1001", 3000, 5)
+# employee2 = Manager("Den", "1002", 4000, 4)
+# employee3 = Designer("David", "1003", 2500, 3)
+# employee4 = TeamLead("Emma", "1004", 5000, 6, 5)
+#
+# # Create a list of employees
+# employees = [employee1, employee2, employee3, employee4]
+#
+# # Print information about all employees
+# for employee in employees:
+#     print(employee.get_info())
+#
+# print("-------------------------")
+#
+# # Check employee ID
+# print("ID 1001:", Employee.check_id("1001"))
+# print("ID 123:", Employee.check_id("123"))
+#
+# print("-------------------------")
+#
+# # Create employee from a string
+# new_employee = Employee.from_string("Andrii,1005,3500")
+# print(new_employee.get_info())
+#
+# print("-------------------------")
+#
+# # Show MRO
+# print("TeamLead MRO:")
+# print(TeamLead.mro())
+#
+# print("-------------------------")
+#
+# # Calculate salary for all employees
+# for employee in employees:
+#     print(employee.name, "Salary:", employee.calculate_salary())
 
 
-class Employee:
-    """This class describes a company employee."""
+# Завдання 3. Система обробки замовлень інтернет-магазину
 
-    def __init__(self, name, employee_id, base_salary):
-        """Create a new employee."""
+class Product:
+    """This class describes a product."""
+
+    def __init__(self, name, price, quantity):
+        """Create a new product."""
+        if price < 0:
+            raise ValueError("Price cannot be negative")
+
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+
         self.name = name
-        self.employee_id = employee_id
-        self.base_salary = base_salary
+        self.price = price
+        self.quantity = quantity
 
-    def __calculate_bonus(self, percent):
-        """Calculate employee bonus."""
-        bonus = self.base_salary * percent / 100
-        return bonus
-
-    def calculate_salary(self):
-        """Calculate total salary."""
-        return self.base_salary + self.__calculate_bonus(5)
-
-    def get_info(self):
-        """Return employee information."""
-        return (f"Name: {self.name}, "
-                f"ID: {self.employee_id}, "
-                f"Salary: {self.calculate_salary()}")
-
-    @staticmethod
-    def check_id(employee_id):
-        """Check if employee ID is correct."""
-        return employee_id.isdigit() and len(employee_id) == 4
-
-    @classmethod
-    def from_string(cls, data):
-        """Create employee from a string."""
-        name, employee_id, salary = data.split(",")
-        return cls(name, employee_id, float(salary))
+    def __str__(self):
+        """Return product information."""
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
 
-# Developer class
-class Developer(Employee):
-    """This class describes a developer."""
+class Order:
+    """This class describes an order."""
 
-    def __init__(self, name, employee_id, base_salary, projects):
-        super().__init__(name, employee_id, base_salary)
-        self.projects = projects
+    def __init__(self):
+        """Create an empty order."""
+        self.products = []
 
-    def calculate_salary(self):
-        """Calculate developer salary."""
-        bonus = self.base_salary * 10 / 100
-        return self.base_salary + bonus + self.projects * 100
+    def add_product(self, product):
+        """Add a product to the order."""
+        self.products.append(product)
+        print(product.name, "added to order")
+
+    @property
+    def total_price(self):
+        """Calculate total order price."""
+        total = 0
+
+        for product in self.products:
+            total += product.price * product.quantity
+
+        return total
+
+    def __add__(self, other):
+        """Combine two orders."""
+        new_order = Order()
+        new_order.products = self.products + other.products
+        return new_order
+
+    def __len__(self):
+        """Return number of products in order."""
+        return len(self.products)
+
+    def __getitem__(self, index):
+        """Get product by index."""
+        return self.products[index]
+
+    def __str__(self):
+        """Return order information."""
+        result = "Order products:\n"
+
+        for product in self.products:
+            result += str(product) + "\n"
+
+        result += f"Total price: {self.total_price}"
+        return result
 
 
-# Manager class
-class Manager(Employee):
-    """This class describes a manager."""
+class DiscountCalculator:
+    """This class calculates order discounts."""
 
-    def __init__(self, name, employee_id, base_salary, team_size):
-        super().__init__(name, employee_id, base_salary)
-        self.team_size = team_size
+    def __init__(self, discount):
+        """Create discount calculator."""
+        self.discount = discount
 
-    def calculate_salary(self):
-        """Calculate manager salary."""
-        bonus = self.base_salary * 15 / 100
-        return self.base_salary + bonus + self.team_size * 200
+    def __call__(self, order_or_sum):
+        """Calculate discount for an order or a sum."""
 
+        if isinstance(order_or_sum, Order):
+            total = order_or_sum.total_price
+        else:
+            total = order_or_sum
 
-# Designer class
-class Designer(Employee):
-    """This class describes a designer."""
+        if total < 0:
+            raise ValueError("Sum cannot be negative")
 
-    def __init__(self, name, employee_id, base_salary, experience):
-        super().__init__(name, employee_id, base_salary)
-        self.experience = experience
+        if total >= 1000:
+            discount = self.discount
+        else:
+            discount = 0
 
-    def calculate_salary(self):
-        """Calculate designer salary."""
-        bonus = self.base_salary * 8 / 100
-        return self.base_salary + bonus + self.experience * 150
+        final_price = total - (total * discount / 100)
 
-
-# TeamLead class
-class TeamLead(Developer, Manager):
-    """This class describes a team leader."""
-
-    def __init__(self, name, employee_id, base_salary,
-                 projects, team_size):
-        Employee.__init__(self, name, employee_id, base_salary)
-        self.projects = projects
-        self.team_size = team_size
-
-    def calculate_salary(self):
-        """Calculate team leader salary."""
-        bonus = self.base_salary * 20 / 100
-        return (self.base_salary + bonus
-                + self.projects * 100
-                + self.team_size * 200)
+        return final_price
 
 
 # Testing the program
 
-employee1 = Developer("Alex", "1001", 3000, 5)
-employee2 = Manager("Den", "1002", 4000, 4)
-employee3 = Designer("David", "1003", 2500, 3)
-employee4 = TeamLead("Emma", "1004", 5000, 6, 5)
+# Create products
+product1 = Product("Laptop", 800, 1)
+product2 = Product("Mouse", 50, 2)
+product3 = Product("Keyboard", 100, 1)
+product4 = Product("Monitor", 300, 2)
 
-# Create a list of employees
-employees = [employee1, employee2, employee3, employee4]
-
-# Print information about all employees
-for employee in employees:
-    print(employee.get_info())
-
-print("-------------------------")
-
-# Check employee ID
-print("ID 1001:", Employee.check_id("1001"))
-print("ID 123:", Employee.check_id("123"))
+# Create first order
+order1 = Order()
+order1.add_product(product1)
+order1.add_product(product2)
 
 print("-------------------------")
+print(order1)
 
-# Create employee from a string
-new_employee = Employee.from_string("Andrii,1005,3500")
-print(new_employee.get_info())
-
-print("-------------------------")
-
-# Show MRO
-print("TeamLead MRO:")
-print(TeamLead.mro())
+# Create second order
+order2 = Order()
+order2.add_product(product3)
+order2.add_product(product4)
 
 print("-------------------------")
+print(order2)
 
-# Calculate salary for all employees
-for employee in employees:
-    print(employee.name, "Salary:", employee.calculate_salary())
+# Combine two orders
+order3 = order1 + order2
+
+print("-------------------------")
+print("Combined order:")
+print(order3)
+
+# Count products in order
+print("-------------------------")
+print("Number of products:", len(order3))
+
+# Get product by index
+print("First product:", order3[0])
+
+# Calculate discount
+print("-------------------------")
+calculator = DiscountCalculator(10)
+
+print("Price before discount:", order3.total_price)
+print("Price after discount:", calculator(order3))
+
+# Calculate discount for a simple sum
+print("Price after discount:", calculator(1500))
