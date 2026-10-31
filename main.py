@@ -1225,120 +1225,258 @@
 
 
 
+#
+# class BankAccount:
+#     """This class describes a bank account."""
+#
+#     def __init__(self, owner, balance):
+#         """Create a new bank account."""
+#         self.owner = owner
+#         self.__balance = balance
+#
+#     @property
+#     def balance(self):
+#         """Return the current balance."""
+#         return self.__balance
+#
+#     def deposit(self, amount):
+#         """Add money to the account."""
+#         if amount > 0:
+#             self.__balance += amount
+#             print("Money successfully deposited")
+#         else:
+#             print("Amount must be greater than zero")
+#
+#     def withdraw(self, amount):
+#         """Withdraw money from the account."""
+#         if amount > 0 and amount <= self.__balance:
+#             self.__balance -= amount
+#             print("Money successfully withdrawn")
+#         else:
+#             print("Not enough money or incorrect amount")
+#
+#     def change_balance(self, amount):
+#         """Change the account balance."""
+#         self.__balance += amount
+#
+#     def __str__(self):
+#         """Return information about the account."""
+#         return f"Owner: {self.owner}, Balance: {self.balance}"
+#
+#
+# class SavingsAccount(BankAccount):
+#     """This class describes a savings account."""
+#
+#     def __init__(self, owner, balance, interest_rate):
+#         """Create a savings account."""
+#         super().__init__(owner, balance)
+#         self.interest_rate = interest_rate
+#
+#     def add_interest(self):
+#         """Add interest to the account balance."""
+#         interest = self.balance * self.interest_rate / 100
+#         self.change_balance(interest)
+#         print(f"Interest added: {interest}")
+#
+#     def withdraw(self, amount):
+#         """Withdraw money from a savings account."""
+#         if amount > 0 and amount <= self.balance:
+#             self.change_balance(-amount)
+#             print("Money withdrawn from savings account")
+#         else:
+#             print("Not enough money")
+#
+#     def __str__(self):
+#         """Return information about the savings account."""
+#         return (f"Savings Account. Owner: {self.owner}, "
+#                 f"Balance: {self.balance}, Interest: {self.interest_rate}%")
+#
+#
+# class BusinessAccount(BankAccount):
+#     """This class describes a business account."""
+#
+#     def __init__(self, owner, balance, commission):
+#         """Create a business account."""
+#         super().__init__(owner, balance)
+#         self.commission = commission
+#
+#     def withdraw(self, amount):
+#         """Withdraw money with a commission."""
+#         total = amount + self.commission
+#
+#         if amount > 0 and total <= self.balance:
+#             self.change_balance(-total)
+#             print(f"Money withdrawn. Commission: {self.commission}")
+#         else:
+#             print("Not enough money including commission")
+#
+#     def __str__(self):
+#         """Return information about the business account."""
+#         return (f"Business Account. Owner: {self.owner}, "
+#                 f"Balance: {self.balance}, Commission: {self.commission}")
+#
+#
+# # Testing the program
+#
+# account1 = BankAccount("David", 1000)
+# print(account1)
+#
+# account1.deposit(500)
+# account1.withdraw(200)
+# print(account1)
+#
+# print("-------------------------")
+#
+# account2 = SavingsAccount("Anna", 2000, 5)
+# print(account2)
+#
+# account2.add_interest()
+# account2.withdraw(300)
+# print(account2)
+#
+# print("-------------------------")
+#
+# account3 = BusinessAccount("Denis", 5000, 50)
+# print(account3)
+#
+# account3.deposit(1000)
+# account3.withdraw(500)
+# print(account3)
 
-class BankAccount:
-    """This class describes a bank account."""
 
-    def __init__(self, owner, balance):
-        """Create a new bank account."""
-        self.owner = owner
-        self.__balance = balance
-
-    @property
-    def balance(self):
-        """Return the current balance."""
-        return self.__balance
-
-    def deposit(self, amount):
-        """Add money to the account."""
-        if amount > 0:
-            self.__balance += amount
-            print("Money successfully deposited")
-        else:
-            print("Amount must be greater than zero")
-
-    def withdraw(self, amount):
-        """Withdraw money from the account."""
-        if amount > 0 and amount <= self.__balance:
-            self.__balance -= amount
-            print("Money successfully withdrawn")
-        else:
-            print("Not enough money or incorrect amount")
-
-    def change_balance(self, amount):
-        """Change the account balance."""
-        self.__balance += amount
-
-    def __str__(self):
-        """Return information about the account."""
-        return f"Owner: {self.owner}, Balance: {self.balance}"
+# Завдання 2. Система обліку працівників
 
 
-class SavingsAccount(BankAccount):
-    """This class describes a savings account."""
+class Employee:
+    """This class describes a company employee."""
 
-    def __init__(self, owner, balance, interest_rate):
-        """Create a savings account."""
-        super().__init__(owner, balance)
-        self.interest_rate = interest_rate
+    def __init__(self, name, employee_id, base_salary):
+        """Create a new employee."""
+        self.name = name
+        self.employee_id = employee_id
+        self.base_salary = base_salary
 
-    def add_interest(self):
-        """Add interest to the account balance."""
-        interest = self.balance * self.interest_rate / 100
-        self.change_balance(interest)
-        print(f"Interest added: {interest}")
+    def __calculate_bonus(self, percent):
+        """Calculate employee bonus."""
+        bonus = self.base_salary * percent / 100
+        return bonus
 
-    def withdraw(self, amount):
-        """Withdraw money from a savings account."""
-        if amount > 0 and amount <= self.balance:
-            self.change_balance(-amount)
-            print("Money withdrawn from savings account")
-        else:
-            print("Not enough money")
+    def calculate_salary(self):
+        """Calculate total salary."""
+        return self.base_salary + self.__calculate_bonus(5)
 
-    def __str__(self):
-        """Return information about the savings account."""
-        return (f"Savings Account. Owner: {self.owner}, "
-                f"Balance: {self.balance}, Interest: {self.interest_rate}%")
+    def get_info(self):
+        """Return employee information."""
+        return (f"Name: {self.name}, "
+                f"ID: {self.employee_id}, "
+                f"Salary: {self.calculate_salary()}")
+
+    @staticmethod
+    def check_id(employee_id):
+        """Check if employee ID is correct."""
+        return employee_id.isdigit() and len(employee_id) == 4
+
+    @classmethod
+    def from_string(cls, data):
+        """Create employee from a string."""
+        name, employee_id, salary = data.split(",")
+        return cls(name, employee_id, float(salary))
 
 
-class BusinessAccount(BankAccount):
-    """This class describes a business account."""
+# Developer class
+class Developer(Employee):
+    """This class describes a developer."""
 
-    def __init__(self, owner, balance, commission):
-        """Create a business account."""
-        super().__init__(owner, balance)
-        self.commission = commission
+    def __init__(self, name, employee_id, base_salary, projects):
+        super().__init__(name, employee_id, base_salary)
+        self.projects = projects
 
-    def withdraw(self, amount):
-        """Withdraw money with a commission."""
-        total = amount + self.commission
+    def calculate_salary(self):
+        """Calculate developer salary."""
+        bonus = self.base_salary * 10 / 100
+        return self.base_salary + bonus + self.projects * 100
 
-        if amount > 0 and total <= self.balance:
-            self.change_balance(-total)
-            print(f"Money withdrawn. Commission: {self.commission}")
-        else:
-            print("Not enough money including commission")
 
-    def __str__(self):
-        """Return information about the business account."""
-        return (f"Business Account. Owner: {self.owner}, "
-                f"Balance: {self.balance}, Commission: {self.commission}")
+# Manager class
+class Manager(Employee):
+    """This class describes a manager."""
+
+    def __init__(self, name, employee_id, base_salary, team_size):
+        super().__init__(name, employee_id, base_salary)
+        self.team_size = team_size
+
+    def calculate_salary(self):
+        """Calculate manager salary."""
+        bonus = self.base_salary * 15 / 100
+        return self.base_salary + bonus + self.team_size * 200
+
+
+# Designer class
+class Designer(Employee):
+    """This class describes a designer."""
+
+    def __init__(self, name, employee_id, base_salary, experience):
+        super().__init__(name, employee_id, base_salary)
+        self.experience = experience
+
+    def calculate_salary(self):
+        """Calculate designer salary."""
+        bonus = self.base_salary * 8 / 100
+        return self.base_salary + bonus + self.experience * 150
+
+
+# TeamLead class
+class TeamLead(Developer, Manager):
+    """This class describes a team leader."""
+
+    def __init__(self, name, employee_id, base_salary,
+                 projects, team_size):
+        Employee.__init__(self, name, employee_id, base_salary)
+        self.projects = projects
+        self.team_size = team_size
+
+    def calculate_salary(self):
+        """Calculate team leader salary."""
+        bonus = self.base_salary * 20 / 100
+        return (self.base_salary + bonus
+                + self.projects * 100
+                + self.team_size * 200)
 
 
 # Testing the program
 
-account1 = BankAccount("David", 1000)
-print(account1)
+employee1 = Developer("Alex", "1001", 3000, 5)
+employee2 = Manager("Den", "1002", 4000, 4)
+employee3 = Designer("David", "1003", 2500, 3)
+employee4 = TeamLead("Emma", "1004", 5000, 6, 5)
 
-account1.deposit(500)
-account1.withdraw(200)
-print(account1)
+# Create a list of employees
+employees = [employee1, employee2, employee3, employee4]
 
-print("-------------------------")
-
-account2 = SavingsAccount("Anna", 2000, 5)
-print(account2)
-
-account2.add_interest()
-account2.withdraw(300)
-print(account2)
+# Print information about all employees
+for employee in employees:
+    print(employee.get_info())
 
 print("-------------------------")
 
-account3 = BusinessAccount("Denis", 5000, 50)
-print(account3)
+# Check employee ID
+print("ID 1001:", Employee.check_id("1001"))
+print("ID 123:", Employee.check_id("123"))
 
-account3.deposit(1000)
-account3.withdraw(500)
-print(account3)
+print("-------------------------")
+
+# Create employee from a string
+new_employee = Employee.from_string("Andrii,1005,3500")
+print(new_employee.get_info())
+
+print("-------------------------")
+
+# Show MRO
+print("TeamLead MRO:")
+print(TeamLead.mro())
+
+print("-------------------------")
+
+# Calculate salary for all employees
+for employee in employees:
+    print(employee.name, "Salary:", employee.calculate_salary())
