@@ -1483,146 +1483,292 @@
 
 
 # Завдання 3. Система обробки замовлень інтернет-магазину
+#
+# class Product:
+#     """This class describes a product."""
+#
+#     def __init__(self, name, price, quantity):
+#         """Create a new product."""
+#         if price < 0:
+#             raise ValueError("Price cannot be negative")
+#
+#         if quantity < 0:
+#             raise ValueError("Quantity cannot be negative")
+#
+#         self.name = name
+#         self.price = price
+#         self.quantity = quantity
+#
+#     def __str__(self):
+#         """Return product information."""
+#         return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
+#
+#
+# class Order:
+#     """This class describes an order."""
+#
+#     def __init__(self):
+#         """Create an empty order."""
+#         self.products = []
+#
+#     def add_product(self, product):
+#         """Add a product to the order."""
+#         self.products.append(product)
+#         print(product.name, "added to order")
+#
+#     @property
+#     def total_price(self):
+#         """Calculate total order price."""
+#         total = 0
+#
+#         for product in self.products:
+#             total += product.price * product.quantity
+#
+#         return total
+#
+#     def __add__(self, other):
+#         """Combine two orders."""
+#         new_order = Order()
+#         new_order.products = self.products + other.products
+#         return new_order
+#
+#     def __len__(self):
+#         """Return number of products in order."""
+#         return len(self.products)
+#
+#     def __getitem__(self, index):
+#         """Get product by index."""
+#         return self.products[index]
+#
+#     def __str__(self):
+#         """Return order information."""
+#         result = "Order products:\n"
+#
+#         for product in self.products:
+#             result += str(product) + "\n"
+#
+#         result += f"Total price: {self.total_price}"
+#         return result
+#
+#
+# class DiscountCalculator:
+#     """This class calculates order discounts."""
+#
+#     def __init__(self, discount):
+#         """Create discount calculator."""
+#         self.discount = discount
+#
+#     def __call__(self, order_or_sum):
+#         """Calculate discount for an order or a sum."""
+#
+#         if isinstance(order_or_sum, Order):
+#             total = order_or_sum.total_price
+#         else:
+#             total = order_or_sum
+#
+#         if total < 0:
+#             raise ValueError("Sum cannot be negative")
+#
+#         if total >= 1000:
+#             discount = self.discount
+#         else:
+#             discount = 0
+#
+#         final_price = total - (total * discount / 100)
+#
+#         return final_price
+#
+#
+# # Testing the program
+#
+# # Create products
+# product1 = Product("Laptop", 800, 1)
+# product2 = Product("Mouse", 50, 2)
+# product3 = Product("Keyboard", 100, 1)
+# product4 = Product("Monitor", 300, 2)
+#
+# # Create first order
+# order1 = Order()
+# order1.add_product(product1)
+# order1.add_product(product2)
+#
+# print("-------------------------")
+# print(order1)
+#
+# # Create second order
+# order2 = Order()
+# order2.add_product(product3)
+# order2.add_product(product4)
+#
+# print("-------------------------")
+# print(order2)
+#
+# # Combine two orders
+# order3 = order1 + order2
+#
+# print("-------------------------")
+# print("Combined order:")
+# print(order3)
+#
+# # Count products in order
+# print("-------------------------")
+# print("Number of products:", len(order3))
+#
+# # Get product by index
+# print("First product:", order3[0])
+#
+# # Calculate discount
+# print("-------------------------")
+# calculator = DiscountCalculator(10)
+#
+# print("Price before discount:", order3.total_price)
+# print("Price after discount:", calculator(order3))
+#
+# # Calculate discount for a simple sum
+# print("Price after discount:", calculator(1500))
 
-class Product:
-    """This class describes a product."""
 
-    def __init__(self, name, price, quantity):
-        """Create a new product."""
-        if price < 0:
-            raise ValueError("Price cannot be negative")
 
-        if quantity < 0:
-            raise ValueError("Quantity cannot be negative")
+# Завдання 4. Система експорту документів
 
-        self.name = name
-        self.price = price
-        self.quantity = quantity
+
+
+from abc import ABC, abstractmethod
+import json
+import csv
+import xml.etree.ElementTree as ET
+import io
+
+
+class Exporter(ABC):
+    """This is a base exporter class."""
+
+    @abstractmethod
+    def export(self, data):
+        """Export data."""
+        pass
+
+
+class JSONExporter(Exporter):
+    """This class exports data to JSON."""
+
+    def export(self, data):
+        """Save data in JSON format."""
+        result = json.dumps(data, indent=4)
+        print("JSON format:")
+        print(result)
+
+
+class CSVExporter(Exporter):
+    """This class exports data to CSV."""
+
+    def export(self, data):
+        """Save data in CSV format."""
+        file = io.StringIO()
+
+        writer = csv.DictWriter(file, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
+
+        print("CSV format:")
+        print(file.getvalue())
+
+
+class XMLExporter(Exporter):
+    """This class exports data to XML."""
+
+    def export(self, data):
+        """Save data in XML format."""
+        root = ET.Element("report")
+
+        for item in data:
+            employee = ET.SubElement(root, "employee")
+
+            for key in item:
+                element = ET.SubElement(employee, key)
+                element.text = str(item[key])
+
+        result = ET.tostring(root, encoding="unicode")
+
+        print("XML format:")
+        print(result)
+
+
+class TXTExporter(Exporter):
+    """This class exports data to TXT."""
+
+    def export(self, data):
+        """Save data in TXT format."""
+        print("TXT format:")
+
+        for item in data:
+            for key in item:
+                print(key, ":", item[key])
+
+            print("----------------")
+
+
+class Report:
+    """This class creates and exports reports."""
+
+    def __init__(self, data, exporter):
+        self.data = data
+        self.exporter = exporter
+
+    def export_report(self):
+        """Export report."""
+        self.exporter.export(self.data)
 
     def __str__(self):
-        """Return product information."""
-        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
+        """Show report information."""
+        return "Report. Number of records: " + str(len(self.data))
 
 
-class Order:
-    """This class describes an order."""
+# This class does not inherit from Exporter
+class MyExporter:
+    """This class uses duck typing."""
 
-    def __init__(self):
-        """Create an empty order."""
-        self.products = []
+    def export(self, data):
+        """Print data."""
+        print("My own export:")
 
-    def add_product(self, product):
-        """Add a product to the order."""
-        self.products.append(product)
-        print(product.name, "added to order")
-
-    @property
-    def total_price(self):
-        """Calculate total order price."""
-        total = 0
-
-        for product in self.products:
-            total += product.price * product.quantity
-
-        return total
-
-    def __add__(self, other):
-        """Combine two orders."""
-        new_order = Order()
-        new_order.products = self.products + other.products
-        return new_order
-
-    def __len__(self):
-        """Return number of products in order."""
-        return len(self.products)
-
-    def __getitem__(self, index):
-        """Get product by index."""
-        return self.products[index]
-
-    def __str__(self):
-        """Return order information."""
-        result = "Order products:\n"
-
-        for product in self.products:
-            result += str(product) + "\n"
-
-        result += f"Total price: {self.total_price}"
-        return result
+        for item in data:
+            print(item)
 
 
-class DiscountCalculator:
-    """This class calculates order discounts."""
-
-    def __init__(self, discount):
-        """Create discount calculator."""
-        self.discount = discount
-
-    def __call__(self, order_or_sum):
-        """Calculate discount for an order or a sum."""
-
-        if isinstance(order_or_sum, Order):
-            total = order_or_sum.total_price
-        else:
-            total = order_or_sum
-
-        if total < 0:
-            raise ValueError("Sum cannot be negative")
-
-        if total >= 1000:
-            discount = self.discount
-        else:
-            discount = 0
-
-        final_price = total - (total * discount / 100)
-
-        return final_price
+# Create data
+data = [
+    {"name": "Alex", "age": 25, "salary": 3000},
+    {"name": "Mary", "age": 30, "salary": 4000},
+    {"name": "Den", "age": 28, "salary": 3500}
+]
 
 
-# Testing the program
-
-# Create products
-product1 = Product("Laptop", 800, 1)
-product2 = Product("Mouse", 50, 2)
-product3 = Product("Keyboard", 100, 1)
-product4 = Product("Monitor", 300, 2)
-
-# Create first order
-order1 = Order()
-order1.add_product(product1)
-order1.add_product(product2)
+# JSON export
+report1 = Report(data, JSONExporter())
+print(report1)
+report1.export_report()
 
 print("-------------------------")
-print(order1)
 
-# Create second order
-order2 = Order()
-order2.add_product(product3)
-order2.add_product(product4)
+# CSV export
+report2 = Report(data, CSVExporter())
+report2.export_report()
 
 print("-------------------------")
-print(order2)
 
-# Combine two orders
-order3 = order1 + order2
+# XML export
+report3 = Report(data, XMLExporter())
+report3.export_report()
 
 print("-------------------------")
-print("Combined order:")
-print(order3)
 
-# Count products in order
+# TXT export
+report4 = Report(data, TXTExporter())
+report4.export_report()
+
 print("-------------------------")
-print("Number of products:", len(order3))
 
-# Get product by index
-print("First product:", order3[0])
-
-# Calculate discount
-print("-------------------------")
-calculator = DiscountCalculator(10)
-
-print("Price before discount:", order3.total_price)
-print("Price after discount:", calculator(order3))
-
-# Calculate discount for a simple sum
-print("Price after discount:", calculator(1500))
+# Duck typing example
+report5 = Report(data, MyExporter())
+report5.export_report()
