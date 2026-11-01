@@ -1630,145 +1630,393 @@
 
 
 # Завдання 4. Система експорту документів
+#
+#
+#
+# from abc import ABC, abstractmethod
+# import json
+# import csv
+# import xml.etree.ElementTree as ET
+# import io
+#
+#
+# class Exporter(ABC):
+#     """This is a base exporter class."""
+#
+#     @abstractmethod
+#     def export(self, data):
+#         """Export data."""
+#         pass
+#
+#
+# class JSONExporter(Exporter):
+#     """This class exports data to JSON."""
+#
+#     def export(self, data):
+#         """Save data in JSON format."""
+#         result = json.dumps(data, indent=4)
+#         print("JSON format:")
+#         print(result)
+#
+#
+# class CSVExporter(Exporter):
+#     """This class exports data to CSV."""
+#
+#     def export(self, data):
+#         """Save data in CSV format."""
+#         file = io.StringIO()
+#
+#         writer = csv.DictWriter(file, fieldnames=data[0].keys())
+#         writer.writeheader()
+#         writer.writerows(data)
+#
+#         print("CSV format:")
+#         print(file.getvalue())
+#
+#
+# class XMLExporter(Exporter):
+#     """This class exports data to XML."""
+#
+#     def export(self, data):
+#         """Save data in XML format."""
+#         root = ET.Element("report")
+#
+#         for item in data:
+#             employee = ET.SubElement(root, "employee")
+#
+#             for key in item:
+#                 element = ET.SubElement(employee, key)
+#                 element.text = str(item[key])
+#
+#         result = ET.tostring(root, encoding="unicode")
+#
+#         print("XML format:")
+#         print(result)
+#
+#
+# class TXTExporter(Exporter):
+#     """This class exports data to TXT."""
+#
+#     def export(self, data):
+#         """Save data in TXT format."""
+#         print("TXT format:")
+#
+#         for item in data:
+#             for key in item:
+#                 print(key, ":", item[key])
+#
+#             print("----------------")
+#
+#
+# class Report:
+#     """This class creates and exports reports."""
+#
+#     def __init__(self, data, exporter):
+#         self.data = data
+#         self.exporter = exporter
+#
+#     def export_report(self):
+#         """Export report."""
+#         self.exporter.export(self.data)
+#
+#     def __str__(self):
+#         """Show report information."""
+#         return "Report. Number of records: " + str(len(self.data))
+#
+#
+# # This class does not inherit from Exporter
+# class MyExporter:
+#     """This class uses duck typing."""
+#
+#     def export(self, data):
+#         """Print data."""
+#         print("My own export:")
+#
+#         for item in data:
+#             print(item)
+#
+#
+# # Create data
+# data = [
+#     {"name": "Alex", "age": 25, "salary": 3000},
+#     {"name": "Mary", "age": 30, "salary": 4000},
+#     {"name": "Den", "age": 28, "salary": 3500}
+# ]
+#
+#
+# # JSON export
+# report1 = Report(data, JSONExporter())
+# print(report1)
+# report1.export_report()
+#
+# print("-------------------------")
+#
+# # CSV export
+# report2 = Report(data, CSVExporter())
+# report2.export_report()
+#
+# print("-------------------------")
+#
+# # XML export
+# report3 = Report(data, XMLExporter())
+# report3.export_report()
+#
+# print("-------------------------")
+#
+# # TXT export
+# report4 = Report(data, TXTExporter())
+# report4.export_report()
+#
+# print("-------------------------")
+#
+# # Duck typing example
+# report5 = Report(data, MyExporter())
+# report5.export_report()
 
 
 
-from abc import ABC, abstractmethod
-import json
-import csv
-import xml.etree.ElementTree as ET
-import io
+# Структури даних ч.1
+
+# Домашнє завдання. Система керування історією редагування документа
 
 
-class Exporter(ABC):
-    """This is a base exporter class."""
-
-    @abstractmethod
-    def export(self, data):
-        """Export data."""
-        pass
+from datetime import datetime
 
 
-class JSONExporter(Exporter):
-    """This class exports data to JSON."""
+class Node:
+    """This class creates one document version."""
 
-    def export(self, data):
-        """Save data in JSON format."""
-        result = json.dumps(data, indent=4)
-        print("JSON format:")
-        print(result)
+    def __init__(self, version_id, text, description):
+        self.version_id = version_id
+        self.text = text
+        self.date = datetime.now()
+        self.description = description
 
-
-class CSVExporter(Exporter):
-    """This class exports data to CSV."""
-
-    def export(self, data):
-        """Save data in CSV format."""
-        file = io.StringIO()
-
-        writer = csv.DictWriter(file, fieldnames=data[0].keys())
-        writer.writeheader()
-        writer.writerows(data)
-
-        print("CSV format:")
-        print(file.getvalue())
+        self.prev = None
+        self.next = None
 
 
-class XMLExporter(Exporter):
-    """This class exports data to XML."""
+class DocumentHistory:
+    """This class manages document history."""
 
-    def export(self, data):
-        """Save data in XML format."""
-        root = ET.Element("report")
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.current = None
+        self.version_id = 1
 
-        for item in data:
-            employee = ET.SubElement(root, "employee")
+    def add_version(self, text, description):
+        """Add a new version."""
 
-            for key in item:
-                element = ET.SubElement(employee, key)
-                element.text = str(item[key])
+        new_node = Node(self.version_id, text, description)
 
-        result = ET.tostring(root, encoding="unicode")
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
 
-        print("XML format:")
-        print(result)
+        self.current = new_node
+        self.version_id += 1
 
+        print("Version added")
 
-class TXTExporter(Exporter):
-    """This class exports data to TXT."""
+    def show_current(self):
+        """Show current version."""
 
-    def export(self, data):
-        """Save data in TXT format."""
-        print("TXT format:")
+        if self.current is None:
+            print("History is empty")
+        else:
+            print("Current version:")
+            print("ID:", self.current.version_id)
+            print("Text:", self.current.text)
+            print("Date:", self.current.date)
+            print("Description:", self.current.description)
 
-        for item in data:
-            for key in item:
-                print(key, ":", item[key])
+    def previous_version(self):
+        """Go to previous version."""
 
+        if self.current is None:
+            print("History is empty")
+        elif self.current.prev is None:
+            print("There is no previous version")
+        else:
+            self.current = self.current.prev
+            self.show_current()
+
+    def next_version(self):
+        """Go to next version."""
+
+        if self.current is None:
+            print("History is empty")
+        elif self.current.next is None:
+            print("There is no next version")
+        else:
+            self.current = self.current.next
+            self.show_current()
+
+    def find_version(self, version_id):
+        """Find version by ID."""
+
+        node = self.head
+
+        while node is not None:
+            if node.version_id == version_id:
+                print("Version found:")
+                print("ID:", node.version_id)
+                print("Text:", node.text)
+                print("Date:", node.date)
+                print("Description:", node.description)
+                return
+
+            node = node.next
+
+        print("Version not found")
+
+    def delete_version(self, version_id):
+        """Delete version by ID."""
+
+        node = self.head
+
+        while node is not None:
+
+            if node.version_id == version_id:
+
+                if node.prev is None:
+                    self.head = node.next
+                else:
+                    node.prev.next = node.next
+
+                if node.next is None:
+                    self.tail = node.prev
+                else:
+                    node.next.prev = node.prev
+
+                if self.current == node:
+                    if node.next is not None:
+                        self.current = node.next
+                    else:
+                        self.current = node.prev
+
+                node.prev = None
+                node.next = None
+
+                print("Version deleted")
+                return
+
+            node = node.next
+
+        print("Version not found")
+
+    def show_history(self):
+        """Show all versions from first to last."""
+
+        if self.head is None:
+            print("History is empty")
+            return
+
+        print("Document history:")
+
+        node = self.head
+
+        while node is not None:
+            print("ID:", node.version_id)
+            print("Text:", node.text)
+            print("Description:", node.description)
+            print("Date:", node.date)
             print("----------------")
 
+            node = node.next
 
-class Report:
-    """This class creates and exports reports."""
+    def show_history_reverse(self):
+        """Show all versions from last to first."""
 
-    def __init__(self, data, exporter):
-        self.data = data
-        self.exporter = exporter
+        if self.tail is None:
+            print("History is empty")
+            return
 
-    def export_report(self):
-        """Export report."""
-        self.exporter.export(self.data)
+        print("Document history in reverse:")
 
-    def __str__(self):
-        """Show report information."""
-        return "Report. Number of records: " + str(len(self.data))
+        node = self.tail
 
+        while node is not None:
+            print("ID:", node.version_id)
+            print("Text:", node.text)
+            print("Description:", node.description)
+            print("Date:", node.date)
+            print("----------------")
 
-# This class does not inherit from Exporter
-class MyExporter:
-    """This class uses duck typing."""
-
-    def export(self, data):
-        """Print data."""
-        print("My own export:")
-
-        for item in data:
-            print(item)
+            node = node.prev
 
 
-# Create data
-data = [
-    {"name": "Alex", "age": 25, "salary": 3000},
-    {"name": "Mary", "age": 30, "salary": 4000},
-    {"name": "Den", "age": 28, "salary": 3500}
-]
+# Testing the program
 
+history = DocumentHistory()
 
-# JSON export
-report1 = Report(data, JSONExporter())
-print(report1)
-report1.export_report()
+"""Add versions."""
+history.add_version("Hello world", "First version")
+history.add_version("Hello world!", "Added exclamation mark")
+history.add_version("Hello, world!", "Added comma")
+history.add_version("Hello, world! Welcome!", "Added new text")
 
 print("-------------------------")
 
-# CSV export
-report2 = Report(data, CSVExporter())
-report2.export_report()
+"""Show current version."""
+history.show_current()
 
 print("-------------------------")
 
-# XML export
-report3 = Report(data, XMLExporter())
-report3.export_report()
+"""Go to previous version."""
+history.previous_version()
 
 print("-------------------------")
 
-# TXT export
-report4 = Report(data, TXTExporter())
-report4.export_report()
+"""Go to next version."""
+history.next_version()
 
 print("-------------------------")
 
-# Duck typing example
-report5 = Report(data, MyExporter())
-report5.export_report()
+"""Find version."""
+history.find_version(2)
+
+print("-------------------------")
+
+"""Show all versions."""
+history.show_history()
+
+print("-------------------------")
+
+"""Show history in reverse."""
+history.show_history_reverse()
+
+print("-------------------------")
+
+"""Delete first version."""
+history.delete_version(1)
+history.show_history()
+
+print("-------------------------")
+
+"""Delete last version."""
+history.delete_version(4)
+history.show_history()
+
+print("-------------------------")
+
+"""Delete current version."""
+history.delete_version(3)
+history.show_current()
+
+print("-------------------------")
+
+"""Delete last remaining version."""
+history.delete_version(2)
+
+"""Check empty history."""
+history.show_current()
+history.show_history()
+history.previous_version()
+history.next_version()
+history.find_version(2)
