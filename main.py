@@ -1778,245 +1778,382 @@
 # Структури даних ч.1
 
 # Домашнє завдання. Система керування історією редагування документа
+#
+#
+# from datetime import datetime
+#
+#
+# class Node:
+#     """This class creates one document version."""
+#
+#     def __init__(self, version_id, text, description):
+#         self.version_id = version_id
+#         self.text = text
+#         self.date = datetime.now()
+#         self.description = description
+#
+#         self.prev = None
+#         self.next = None
+#
+#
+# class DocumentHistory:
+#     """This class manages document history."""
+#
+#     def __init__(self):
+#         self.head = None
+#         self.tail = None
+#         self.current = None
+#         self.version_id = 1
+#
+#     def add_version(self, text, description):
+#         """Add a new version."""
+#
+#         new_node = Node(self.version_id, text, description)
+#
+#         if self.head is None:
+#             self.head = new_node
+#             self.tail = new_node
+#         else:
+#             self.tail.next = new_node
+#             new_node.prev = self.tail
+#             self.tail = new_node
+#
+#         self.current = new_node
+#         self.version_id += 1
+#
+#         print("Version added")
+#
+#     def show_current(self):
+#         """Show current version."""
+#
+#         if self.current is None:
+#             print("History is empty")
+#         else:
+#             print("Current version:")
+#             print("ID:", self.current.version_id)
+#             print("Text:", self.current.text)
+#             print("Date:", self.current.date)
+#             print("Description:", self.current.description)
+#
+#     def previous_version(self):
+#         """Go to previous version."""
+#
+#         if self.current is None:
+#             print("History is empty")
+#         elif self.current.prev is None:
+#             print("There is no previous version")
+#         else:
+#             self.current = self.current.prev
+#             self.show_current()
+#
+#     def next_version(self):
+#         """Go to next version."""
+#
+#         if self.current is None:
+#             print("History is empty")
+#         elif self.current.next is None:
+#             print("There is no next version")
+#         else:
+#             self.current = self.current.next
+#             self.show_current()
+#
+#     def find_version(self, version_id):
+#         """Find version by ID."""
+#
+#         node = self.head
+#
+#         while node is not None:
+#             if node.version_id == version_id:
+#                 print("Version found:")
+#                 print("ID:", node.version_id)
+#                 print("Text:", node.text)
+#                 print("Date:", node.date)
+#                 print("Description:", node.description)
+#                 return
+#
+#             node = node.next
+#
+#         print("Version not found")
+#
+#     def delete_version(self, version_id):
+#         """Delete version by ID."""
+#
+#         node = self.head
+#
+#         while node is not None:
+#
+#             if node.version_id == version_id:
+#
+#                 if node.prev is None:
+#                     self.head = node.next
+#                 else:
+#                     node.prev.next = node.next
+#
+#                 if node.next is None:
+#                     self.tail = node.prev
+#                 else:
+#                     node.next.prev = node.prev
+#
+#                 if self.current == node:
+#                     if node.next is not None:
+#                         self.current = node.next
+#                     else:
+#                         self.current = node.prev
+#
+#                 node.prev = None
+#                 node.next = None
+#
+#                 print("Version deleted")
+#                 return
+#
+#             node = node.next
+#
+#         print("Version not found")
+#
+#     def show_history(self):
+#         """Show all versions from first to last."""
+#
+#         if self.head is None:
+#             print("History is empty")
+#             return
+#
+#         print("Document history:")
+#
+#         node = self.head
+#
+#         while node is not None:
+#             print("ID:", node.version_id)
+#             print("Text:", node.text)
+#             print("Description:", node.description)
+#             print("Date:", node.date)
+#             print("----------------")
+#
+#             node = node.next
+#
+#     def show_history_reverse(self):
+#         """Show all versions from last to first."""
+#
+#         if self.tail is None:
+#             print("History is empty")
+#             return
+#
+#         print("Document history in reverse:")
+#
+#         node = self.tail
+#
+#         while node is not None:
+#             print("ID:", node.version_id)
+#             print("Text:", node.text)
+#             print("Description:", node.description)
+#             print("Date:", node.date)
+#             print("----------------")
+#
+#             node = node.prev
+#
+#
+# # Testing the program
+#
+# history = DocumentHistory()
+#
+# """Add versions."""
+# history.add_version("Hello world", "First version")
+# history.add_version("Hello world!", "Added exclamation mark")
+# history.add_version("Hello, world!", "Added comma")
+# history.add_version("Hello, world! Welcome!", "Added new text")
+#
+# print("-------------------------")
+#
+# """Show current version."""
+# history.show_current()
+#
+# print("-------------------------")
+#
+# """Go to previous version."""
+# history.previous_version()
+#
+# print("-------------------------")
+#
+# """Go to next version."""
+# history.next_version()
+#
+# print("-------------------------")
+#
+# """Find version."""
+# history.find_version(2)
+#
+# print("-------------------------")
+#
+# """Show all versions."""
+# history.show_history()
+#
+# print("-------------------------")
+#
+# """Show history in reverse."""
+# history.show_history_reverse()
+#
+# print("-------------------------")
+#
+# """Delete first version."""
+# history.delete_version(1)
+# history.show_history()
+#
+# print("-------------------------")
+#
+# """Delete last version."""
+# history.delete_version(4)
+# history.show_history()
+#
+# print("-------------------------")
+#
+# """Delete current version."""
+# history.delete_version(3)
+# history.show_current()
+#
+# print("-------------------------")
+#
+# """Delete last remaining version."""
+# history.delete_version(2)
+#
+# """Check empty history."""
+# history.show_current()
+# history.show_history()
+# history.previous_version()
+# history.next_version()
+# history.find_version(2)
 
 
-from datetime import datetime
+# Структури даних ч.2
 
 
-class Node:
-    """This class creates one document version."""
 
-    def __init__(self, version_id, text, description):
-        self.version_id = version_id
-        self.text = text
-        self.date = datetime.now()
-        self.description = description
-
-        self.prev = None
-        self.next = None
-
-
-class DocumentHistory:
-    """This class manages document history."""
+class Stack:
+    """This class creates a stack."""
 
     def __init__(self):
-        self.head = None
-        self.tail = None
-        self.current = None
-        self.version_id = 1
+        """Create an empty stack."""
+        self.items = []
 
-    def add_version(self, text, description):
-        """Add a new version."""
+    def push(self, item):
+        """Add an operation to the stack."""
+        self.items.append(item)
+        print("Operation added")
 
-        new_node = Node(self.version_id, text, description)
+    def pop(self):
+        """Remove the last operation."""
+        if self.is_empty():
+            print("Stack is empty. Nothing to cancel")
+            return None
 
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next = new_node
-            new_node.prev = self.tail
-            self.tail = new_node
+        return self.items.pop()
 
-        self.current = new_node
-        self.version_id += 1
+    def peek(self):
+        """Show the last operation."""
+        if self.is_empty():
+            print("Stack is empty")
+            return None
 
-        print("Version added")
+        return self.items[-1]
 
-    def show_current(self):
-        """Show current version."""
+    def is_empty(self):
+        """Check if the stack is empty."""
+        return len(self.items) == 0
 
-        if self.current is None:
-            print("History is empty")
-        else:
-            print("Current version:")
-            print("ID:", self.current.version_id)
-            print("Text:", self.current.text)
-            print("Date:", self.current.date)
-            print("Description:", self.current.description)
-
-    def previous_version(self):
-        """Go to previous version."""
-
-        if self.current is None:
-            print("History is empty")
-        elif self.current.prev is None:
-            print("There is no previous version")
-        else:
-            self.current = self.current.prev
-            self.show_current()
-
-    def next_version(self):
-        """Go to next version."""
-
-        if self.current is None:
-            print("History is empty")
-        elif self.current.next is None:
-            print("There is no next version")
-        else:
-            self.current = self.current.next
-            self.show_current()
-
-    def find_version(self, version_id):
-        """Find version by ID."""
-
-        node = self.head
-
-        while node is not None:
-            if node.version_id == version_id:
-                print("Version found:")
-                print("ID:", node.version_id)
-                print("Text:", node.text)
-                print("Date:", node.date)
-                print("Description:", node.description)
-                return
-
-            node = node.next
-
-        print("Version not found")
-
-    def delete_version(self, version_id):
-        """Delete version by ID."""
-
-        node = self.head
-
-        while node is not None:
-
-            if node.version_id == version_id:
-
-                if node.prev is None:
-                    self.head = node.next
-                else:
-                    node.prev.next = node.next
-
-                if node.next is None:
-                    self.tail = node.prev
-                else:
-                    node.next.prev = node.prev
-
-                if self.current == node:
-                    if node.next is not None:
-                        self.current = node.next
-                    else:
-                        self.current = node.prev
-
-                node.prev = None
-                node.next = None
-
-                print("Version deleted")
-                return
-
-            node = node.next
-
-        print("Version not found")
+    def size(self):
+        """Return number of operations."""
+        return len(self.items)
 
     def show_history(self):
-        """Show all versions from first to last."""
-
-        if self.head is None:
+        """Show all operations."""
+        if self.is_empty():
             print("History is empty")
-            return
+        else:
+            print("Operation history:")
 
-        print("Document history:")
+            i = self.size() - 1
 
-        node = self.head
-
-        while node is not None:
-            print("ID:", node.version_id)
-            print("Text:", node.text)
-            print("Description:", node.description)
-            print("Date:", node.date)
-            print("----------------")
-
-            node = node.next
-
-    def show_history_reverse(self):
-        """Show all versions from last to first."""
-
-        if self.tail is None:
-            print("History is empty")
-            return
-
-        print("Document history in reverse:")
-
-        node = self.tail
-
-        while node is not None:
-            print("ID:", node.version_id)
-            print("Text:", node.text)
-            print("Description:", node.description)
-            print("Date:", node.date)
-            print("----------------")
-
-            node = node.prev
+            while i >= 0:
+                print(self.items[i])
+                i -= 1
 
 
-# Testing the program
+# Create a stack
+history = Stack()
 
-history = DocumentHistory()
-
-"""Add versions."""
-history.add_version("Hello world", "First version")
-history.add_version("Hello world!", "Added exclamation mark")
-history.add_version("Hello, world!", "Added comma")
-history.add_version("Hello, world! Welcome!", "Added new text")
+"""Add five operations."""
+history.push('Added product "Keyboard"')
+history.push('Changed price of product "Mouse"')
+history.push('Changed quantity of product "Monitor"')
+history.push('Deleted product "Headphones"')
+history.push('Added product "Laptop"')
 
 print("-------------------------")
 
-"""Show current version."""
-history.show_current()
+"""Show the last operation."""
+print("Last operation:", history.peek())
 
 print("-------------------------")
 
-"""Go to previous version."""
-history.previous_version()
+"""Cancel the last two operations."""
+print("Cancel operation:", history.pop())
+print("Cancel operation:", history.pop())
 
 print("-------------------------")
 
-"""Go to next version."""
-history.next_version()
-
-print("-------------------------")
-
-"""Find version."""
-history.find_version(2)
-
-print("-------------------------")
-
-"""Show all versions."""
+"""Show remaining history."""
 history.show_history()
 
 print("-------------------------")
 
-"""Show history in reverse."""
-history.show_history_reverse()
+"""Show number of operations."""
+print("Number of operations:", history.size())
 
 print("-------------------------")
 
-"""Delete first version."""
-history.delete_version(1)
-history.show_history()
+"""Try to cancel an operation when stack is empty."""
+history.pop()
 
-print("-------------------------")
 
-"""Delete last version."""
-history.delete_version(4)
-history.show_history()
+# Additional task: menu
 
-print("-------------------------")
+def menu():
+    """Show menu for working with operation history."""
 
-"""Delete current version."""
-history.delete_version(3)
-history.show_current()
+    stack = Stack()
 
-print("-------------------------")
+    while True:
+        print("\nMENU")
+        print("1. Add operation")
+        print("2. Show last operation")
+        print("3. Cancel operation")
+        print("4. Show number of operations")
+        print("5. Show history")
+        print("0. Exit")
 
-"""Delete last remaining version."""
-history.delete_version(2)
+        choice = input("Choose an option: ")
 
-"""Check empty history."""
-history.show_current()
-history.show_history()
-history.previous_version()
-history.next_version()
-history.find_version(2)
+        if choice == "1":
+            operation = input("Enter operation: ")
+            stack.push(operation)
+
+        elif choice == "2":
+            print("Last operation:", stack.peek())
+
+        elif choice == "3":
+            print("Canceled:", stack.pop())
+
+        elif choice == "4":
+            print("Number of operations:", stack.size())
+
+        elif choice == "5":
+            stack.show_history()
+
+        elif choice == "0":
+            print("Program finished")
+            break
+
+        else:
+            print("Incorrect choice")
+
+
+"""Start the menu."""
+menu()
