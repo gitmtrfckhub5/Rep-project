@@ -2023,137 +2023,278 @@
 
 
 # Структури даних ч.2
+#
+#
+#
+# class Stack:
+#     """This class creates a stack."""
+#
+#     def __init__(self):
+#         """Create an empty stack."""
+#         self.items = []
+#
+#     def push(self, item):
+#         """Add an operation to the stack."""
+#         self.items.append(item)
+#         print("Operation added")
+#
+#     def pop(self):
+#         """Remove the last operation."""
+#         if self.is_empty():
+#             print("Stack is empty. Nothing to cancel")
+#             return None
+#
+#         return self.items.pop()
+#
+#     def peek(self):
+#         """Show the last operation."""
+#         if self.is_empty():
+#             print("Stack is empty")
+#             return None
+#
+#         return self.items[-1]
+#
+#     def is_empty(self):
+#         """Check if the stack is empty."""
+#         return len(self.items) == 0
+#
+#     def size(self):
+#         """Return number of operations."""
+#         return len(self.items)
+#
+#     def show_history(self):
+#         """Show all operations."""
+#         if self.is_empty():
+#             print("History is empty")
+#         else:
+#             print("Operation history:")
+#
+#             i = self.size() - 1
+#
+#             while i >= 0:
+#                 print(self.items[i])
+#                 i -= 1
+#
+#
+# # Create a stack
+# history = Stack()
+#
+# """Add five operations."""
+# history.push('Added product "Keyboard"')
+# history.push('Changed price of product "Mouse"')
+# history.push('Changed quantity of product "Monitor"')
+# history.push('Deleted product "Headphones"')
+# history.push('Added product "Laptop"')
+#
+# print("-------------------------")
+#
+# """Show the last operation."""
+# print("Last operation:", history.peek())
+#
+# print("-------------------------")
+#
+# """Cancel the last two operations."""
+# print("Cancel operation:", history.pop())
+# print("Cancel operation:", history.pop())
+#
+# print("-------------------------")
+#
+# """Show remaining history."""
+# history.show_history()
+#
+# print("-------------------------")
+#
+# """Show number of operations."""
+# print("Number of operations:", history.size())
+#
+# print("-------------------------")
+#
+# """Try to cancel an operation when stack is empty."""
+# history.pop()
+#
+#
+# # Additional task: menu
+#
+# def menu():
+#     """Show menu for working with operation history."""
+#
+#     stack = Stack()
+#
+#     while True:
+#         print("\nMENU")
+#         print("1. Add operation")
+#         print("2. Show last operation")
+#         print("3. Cancel operation")
+#         print("4. Show number of operations")
+#         print("5. Show history")
+#         print("0. Exit")
+#
+#         choice = input("Choose an option: ")
+#
+#         if choice == "1":
+#             operation = input("Enter operation: ")
+#             stack.push(operation)
+#
+#         elif choice == "2":
+#             print("Last operation:", stack.peek())
+#
+#         elif choice == "3":
+#             print("Canceled:", stack.pop())
+#
+#         elif choice == "4":
+#             print("Number of operations:", stack.size())
+#
+#         elif choice == "5":
+#             stack.show_history()
+#
+#         elif choice == "0":
+#             print("Program finished")
+#             break
+#
+#         else:
+#             print("Incorrect choice")
+#
+#
+# """Start the menu."""
+# menu()
 
 
-
-class Stack:
-    """This class creates a stack."""
-
-    def __init__(self):
-        """Create an empty stack."""
-        self.items = []
-
-    def push(self, item):
-        """Add an operation to the stack."""
-        self.items.append(item)
-        print("Operation added")
-
-    def pop(self):
-        """Remove the last operation."""
-        if self.is_empty():
-            print("Stack is empty. Nothing to cancel")
-            return None
-
-        return self.items.pop()
-
-    def peek(self):
-        """Show the last operation."""
-        if self.is_empty():
-            print("Stack is empty")
-            return None
-
-        return self.items[-1]
-
-    def is_empty(self):
-        """Check if the stack is empty."""
-        return len(self.items) == 0
-
-    def size(self):
-        """Return number of operations."""
-        return len(self.items)
-
-    def show_history(self):
-        """Show all operations."""
-        if self.is_empty():
-            print("History is empty")
-        else:
-            print("Operation history:")
-
-            i = self.size() - 1
-
-            while i >= 0:
-                print(self.items[i])
-                i -= 1
+# Структури даних ч.3
 
 
-# Create a stack
-history = Stack()
+from collections import deque
 
-"""Add five operations."""
-history.push('Added product "Keyboard"')
-history.push('Changed price of product "Mouse"')
-history.push('Changed quantity of product "Monitor"')
-history.push('Deleted product "Headphones"')
-history.push('Added product "Laptop"')
+"""Create a queue for student requests"""
+queue = deque()
 
-print("-------------------------")
+"""Counter for processed requests"""
+processed_count = 0
 
-"""Show the last operation."""
-print("Last operation:", history.peek())
-
-print("-------------------------")
-
-"""Cancel the last two operations."""
-print("Cancel operation:", history.pop())
-print("Cancel operation:", history.pop())
-
-print("-------------------------")
-
-"""Show remaining history."""
-history.show_history()
-
-print("-------------------------")
-
-"""Show number of operations."""
-print("Number of operations:", history.size())
-
-print("-------------------------")
-
-"""Try to cancel an operation when stack is empty."""
-history.pop()
+"""Number of the next request"""
+next_number = 1
 
 
-# Additional task: menu
+"""Function to add a new request"""
+def add_request():
+    global next_number
 
-def menu():
-    """Show menu for working with operation history."""
+    print("\n--- Add a new request ---")
 
-    stack = Stack()
+    name = input("Enter student name: ")
+    topic = input("Enter request topic: ")
+    description = input("Enter problem description: ")
 
-    while True:
-        print("\nMENU")
-        print("1. Add operation")
-        print("2. Show last operation")
-        print("3. Cancel operation")
-        print("4. Show number of operations")
-        print("5. Show history")
-        print("0. Exit")
+    request = {
+        "number": next_number,
+        "name": name,
+        "topic": topic,
+        "description": description
+    }
 
-        choice = input("Choose an option: ")
+    queue.append(request)
 
-        if choice == "1":
-            operation = input("Enter operation: ")
-            stack.push(operation)
+    print("Request successfully added!")
+    print("Request number:", next_number)
 
-        elif choice == "2":
-            print("Last operation:", stack.peek())
-
-        elif choice == "3":
-            print("Canceled:", stack.pop())
-
-        elif choice == "4":
-            print("Number of operations:", stack.size())
-
-        elif choice == "5":
-            stack.show_history()
-
-        elif choice == "0":
-            print("Program finished")
-            break
-
-        else:
-            print("Incorrect choice")
+    next_number += 1
 
 
-"""Start the menu."""
-menu()
+"""Function to view the next request"""
+def show_next_request():
+
+    if len(queue) == 0:
+        print("\nThe queue is empty.")
+    else:
+        request = queue[0]
+
+        print("\n--- Next request ---")
+        print("Number:", request["number"])
+        print("Student:", request["name"])
+        print("Topic:", request["topic"])
+        print("Description:", request["description"])
+
+
+"""Function to process the next request"""
+def process_request():
+    global processed_count
+
+    if len(queue) == 0:
+        print("\nThere are no requests to process.")
+    else:
+        request = queue.popleft()
+
+        print("\n--- Request processed ---")
+        print("Number:", request["number"])
+        print("Student:", request["name"])
+        print("Topic:", request["topic"])
+        print("Description:", request["description"])
+
+        processed_count += 1
+
+
+"""Function to display all waiting requests"""
+def show_all_requests():
+
+    if len(queue) == 0:
+        print("\nThe queue is empty.")
+    else:
+        print("\n--- All waiting requests ---")
+
+        for request in queue:
+            print("----------------------")
+            print("Number:", request["number"])
+            print("Student:", request["name"])
+            print("Topic:", request["topic"])
+            print("Description:", request["description"])
+
+
+"""Function to show the number of requests in the queue"""
+def show_queue_count():
+
+    print("\nNumber of requests in the queue:", len(queue))
+
+
+"""Function to show the number of processed requests"""
+def show_processed_count():
+
+    print("\nNumber of processed requests:", processed_count)
+
+
+"""Main program menu"""
+while True:
+
+    print("\n========== STUDENT REQUEST SYSTEM ==========")
+    print("1. Add a new request")
+    print("2. View the next request")
+    print("3. Process the next request")
+    print("4. Show all requests")
+    print("5. Show number of requests in the queue")
+    print("6. Show number of processed requests")
+    print("0. Exit")
+
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        add_request()
+
+    elif choice == "2":
+        show_next_request()
+
+    elif choice == "3":
+        process_request()
+
+    elif choice == "4":
+        show_all_requests()
+
+    elif choice == "5":
+        show_queue_count()
+
+    elif choice == "6":
+        show_processed_count()
+
+    elif choice == "0":
+        print("\nProgram finished.")
+        break
+
+    else:
+        print("\nInvalid choice. Please try again.")
