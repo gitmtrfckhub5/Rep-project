@@ -2160,141 +2160,471 @@
 
 
 # Структури даних ч.3
+#
+#
+#
+# from collections import deque
+#
+# """Create a queue for student requests"""
+# queue = deque()
+#
+# """Counter for processed requests"""
+# processed_count = 0
+#
+# """Number of the next request"""
+# next_number = 1
+#
+#
+# """Function to add a new request"""
+# def add_request():
+#     global next_number
+#
+#     print("\n--- Add a new request ---")
+#
+#     name = input("Enter student name: ")
+#     topic = input("Enter request topic: ")
+#     description = input("Enter problem description: ")
+#
+#     request = {
+#         "number": next_number,
+#         "name": name,
+#         "topic": topic,
+#         "description": description
+#     }
+#
+#     queue.append(request)
+#
+#     print("Request successfully added!")
+#     print("Request number:", next_number)
+#
+#     next_number += 1
+#
+#
+# """Function to view the next request"""
+# def show_next_request():
+#
+#     if len(queue) == 0:
+#         print("\nThe queue is empty.")
+#     else:
+#         request = queue[0]
+#
+#         print("\n--- Next request ---")
+#         print("Number:", request["number"])
+#         print("Student:", request["name"])
+#         print("Topic:", request["topic"])
+#         print("Description:", request["description"])
+#
+#
+# """Function to process the next request"""
+# def process_request():
+#     global processed_count
+#
+#     if len(queue) == 0:
+#         print("\nThere are no requests to process.")
+#     else:
+#         request = queue.popleft()
+#
+#         print("\n--- Request processed ---")
+#         print("Number:", request["number"])
+#         print("Student:", request["name"])
+#         print("Topic:", request["topic"])
+#         print("Description:", request["description"])
+#
+#         processed_count += 1
+#
+#
+# """Function to display all waiting requests"""
+# def show_all_requests():
+#
+#     if len(queue) == 0:
+#         print("\nThe queue is empty.")
+#     else:
+#         print("\n--- All waiting requests ---")
+#
+#         for request in queue:
+#             print("----------------------")
+#             print("Number:", request["number"])
+#             print("Student:", request["name"])
+#             print("Topic:", request["topic"])
+#             print("Description:", request["description"])
+#
+#
+# """Function to show the number of requests in the queue"""
+# def show_queue_count():
+#
+#     print("\nNumber of requests in the queue:", len(queue))
+#
+#
+# """Function to show the number of processed requests"""
+# def show_processed_count():
+#
+#     print("\nNumber of processed requests:", processed_count)
+#
+#
+# """Main program menu"""
+# while True:
+#
+#     print("\n========== STUDENT REQUEST SYSTEM ==========")
+#     print("1. Add a new request")
+#     print("2. View the next request")
+#     print("3. Process the next request")
+#     print("4. Show all requests")
+#     print("5. Show number of requests in the queue")
+#     print("6. Show number of processed requests")
+#     print("0. Exit")
+#
+#     choice = input("Choose an option: ")
+#
+#     if choice == "1":
+#         add_request()
+#
+#     elif choice == "2":
+#         show_next_request()
+#
+#     elif choice == "3":
+#         process_request()
+#
+#     elif choice == "4":
+#         show_all_requests()
+#
+#     elif choice == "5":
+#         show_queue_count()
+#
+#     elif choice == "6":
+#         show_processed_count()
+#
+#     elif choice == "0":
+#         print("\nProgram finished.")
+#         break
+#
+#     else:
+#         print("\nInvalid choice. Please try again.")
+#
 
 
-from collections import deque
-
-"""Create a queue for student requests"""
-queue = deque()
-
-"""Counter for processed requests"""
-processed_count = 0
-
-"""Number of the next request"""
-next_number = 1
+# Структури даних ч.4
 
 
-"""Function to add a new request"""
-def add_request():
-    global next_number
+"""Class for storing book information"""
+class Book:
 
-    print("\n--- Add a new request ---")
-
-    name = input("Enter student name: ")
-    topic = input("Enter request topic: ")
-    description = input("Enter problem description: ")
-
-    request = {
-        "number": next_number,
-        "name": name,
-        "topic": topic,
-        "description": description
-    }
-
-    queue.append(request)
-
-    print("Request successfully added!")
-    print("Request number:", next_number)
-
-    next_number += 1
+    def __init__(self, number, title, author, year):
+        self.number = number
+        self.title = title
+        self.author = author
+        self.year = year
 
 
-"""Function to view the next request"""
-def show_next_request():
+"""Class for creating a tree node"""
+class Node:
 
-    if len(queue) == 0:
-        print("\nThe queue is empty.")
-    else:
-        request = queue[0]
-
-        print("\n--- Next request ---")
-        print("Number:", request["number"])
-        print("Student:", request["name"])
-        print("Topic:", request["topic"])
-        print("Description:", request["description"])
+    def __init__(self, book):
+        self.book = book
+        self.left = None
+        self.right = None
 
 
-"""Function to process the next request"""
-def process_request():
-    global processed_count
+"""Class for binary search tree"""
+class BinarySearchTree:
 
-    if len(queue) == 0:
-        print("\nThere are no requests to process.")
-    else:
-        request = queue.popleft()
+    def __init__(self):
+        self.root = None
 
-        print("\n--- Request processed ---")
-        print("Number:", request["number"])
-        print("Student:", request["name"])
-        print("Topic:", request["topic"])
-        print("Description:", request["description"])
+    """Function to add a new book"""
+    def add_book(self, book):
 
-        processed_count += 1
+        if self.root is None:
+            self.root = Node(book)
+            print("Book successfully added!")
+        else:
+            self.add_node(self.root, book)
 
+    """Function to add a node to the tree"""
+    def add_node(self, current, book):
 
-"""Function to display all waiting requests"""
-def show_all_requests():
+        if book.number == current.book.number:
+            print("This inventory number already exists!")
+        elif book.number < current.book.number:
 
-    if len(queue) == 0:
-        print("\nThe queue is empty.")
-    else:
-        print("\n--- All waiting requests ---")
+            if current.left is None:
+                current.left = Node(book)
+                print("Book successfully added!")
+            else:
+                self.add_node(current.left, book)
 
-        for request in queue:
+        else:
+
+            if current.right is None:
+                current.right = Node(book)
+                print("Book successfully added!")
+            else:
+                self.add_node(current.right, book)
+
+    """Function to search for a book"""
+    def search_book(self, number):
+
+        current = self.root
+
+        while current is not None:
+
+            if number == current.book.number:
+                return current.book
+
+            elif number < current.book.number:
+                current = current.left
+
+            else:
+                current = current.right
+
+        return None
+
+    """Function to display all books in ascending order"""
+    def show_all_books(self):
+
+        if self.root is None:
+            print("The tree is empty.")
+        else:
+            print("\n--- All books in ascending order ---")
+            self.show_in_order(self.root)
+
+    """Function for displaying books in order"""
+    def show_in_order(self, current):
+
+        if current is not None:
+            self.show_in_order(current.left)
+
             print("----------------------")
-            print("Number:", request["number"])
-            print("Student:", request["name"])
-            print("Topic:", request["topic"])
-            print("Description:", request["description"])
+            print("Number:", current.book.number)
+            print("Title:", current.book.title)
+            print("Author:", current.book.author)
+            print("Year:", current.book.year)
+
+            self.show_in_order(current.right)
+
+    """Function to find the book with the smallest number"""
+    def find_min(self):
+
+        if self.root is None:
+            return None
+
+        current = self.root
+
+        while current.left is not None:
+            current = current.left
+
+        return current.book
+
+    """Function to find the book with the largest number"""
+    def find_max(self):
+
+        if self.root is None:
+            return None
+
+        current = self.root
+
+        while current.right is not None:
+            current = current.right
+
+        return current.book
+
+    """Function to count all books"""
+    def count_books(self):
+
+        return self.count_nodes(self.root)
+
+    """Function to count tree nodes"""
+    def count_nodes(self, current):
+
+        if current is None:
+            return 0
+
+        return 1 + self.count_nodes(current.left) + self.count_nodes(current.right)
+
+    """Function to check if the tree is empty"""
+    def is_empty(self):
+
+        return self.root is None
+
+    """Function to display the tree structure"""
+    def show_tree(self):
+
+        if self.root is None:
+            print("The tree is empty.")
+        else:
+            print("\n--- Tree structure ---")
+            self.print_tree(self.root, 0)
+
+    """Function to print the tree"""
+    def print_tree(self, current, level):
+
+        if current is not None:
+
+            self.print_tree(current.right, level + 1)
+
+            print("    " * level + str(current.book.number) +
+                  " - " + current.book.title)
+
+            self.print_tree(current.left, level + 1)
+
+    """Function to delete a book"""
+    def delete_book(self, number):
+
+        if self.search_book(number) is None:
+            print("Book not found.")
+        else:
+            self.root = self.delete_node(self.root, number)
+            print("Book successfully deleted!")
+
+    """Function to delete a node"""
+    def delete_node(self, current, number):
+
+        if current is None:
+            return None
+
+        if number < current.book.number:
+            current.left = self.delete_node(current.left, number)
+
+        elif number > current.book.number:
+            current.right = self.delete_node(current.right, number)
+
+        else:
+
+            # Case 1: Node has no children
+            if current.left is None and current.right is None:
+                return None
+
+            # Case 2: Node has only one child
+            elif current.left is None:
+                return current.right
+
+            elif current.right is None:
+                return current.left
+
+            # Case 3: Node has two children
+            else:
+                min_node = current.right
+
+                while min_node.left is not None:
+                    min_node = min_node.left
+
+                current.book = min_node.book
+
+                current.right = self.delete_node(
+                    current.right, min_node.book.number
+                )
+
+        return current
 
 
-"""Function to show the number of requests in the queue"""
-def show_queue_count():
-
-    print("\nNumber of requests in the queue:", len(queue))
-
-
-"""Function to show the number of processed requests"""
-def show_processed_count():
-
-    print("\nNumber of processed requests:", processed_count)
+"""Create the binary search tree"""
+library = BinarySearchTree()
 
 
 """Main program menu"""
 while True:
 
-    print("\n========== STUDENT REQUEST SYSTEM ==========")
-    print("1. Add a new request")
-    print("2. View the next request")
-    print("3. Process the next request")
-    print("4. Show all requests")
-    print("5. Show number of requests in the queue")
-    print("6. Show number of processed requests")
+    print("\n========== LIBRARY CATALOG ==========")
+    print("1. Add a new book")
+    print("2. Search for a book")
+    print("3. Show all books")
+    print("4. Find the book with the smallest number")
+    print("5. Find the book with the largest number")
+    print("6. Count all books")
+    print("7. Check if the tree is empty")
+    print("8. Show tree structure")
+    print("9. Delete a book")
     print("0. Exit")
 
     choice = input("Choose an option: ")
 
     if choice == "1":
-        add_request()
+
+        print("\n--- Add a new book ---")
+
+        number = int(input("Enter inventory number: "))
+
+        if library.search_book(number) is not None:
+            print("This inventory number already exists!")
+        else:
+            title = input("Enter book title: ")
+            author = input("Enter author: ")
+            year = int(input("Enter publication year: "))
+
+            book = Book(number, title, author, year)
+
+            library.add_book(book)
 
     elif choice == "2":
-        show_next_request()
+
+        number = int(input("Enter inventory number: "))
+
+        book = library.search_book(number)
+
+        if book is None:
+            print("Book not found.")
+        else:
+            print("\n--- Book found ---")
+            print("Number:", book.number)
+            print("Title:", book.title)
+            print("Author:", book.author)
+            print("Year:", book.year)
 
     elif choice == "3":
-        process_request()
+
+        library.show_all_books()
 
     elif choice == "4":
-        show_all_requests()
+
+        book = library.find_min()
+
+        if book is None:
+            print("The tree is empty.")
+        else:
+            print("\nBook with the smallest inventory number:")
+            print("Number:", book.number)
+            print("Title:", book.title)
+            print("Author:", book.author)
+            print("Year:", book.year)
 
     elif choice == "5":
-        show_queue_count()
+
+        book = library.find_max()
+
+        if book is None:
+            print("The tree is empty.")
+        else:
+            print("\nBook with the largest inventory number:")
+            print("Number:", book.number)
+            print("Title:", book.title)
+            print("Author:", book.author)
+            print("Year:", book.year)
 
     elif choice == "6":
-        show_processed_count()
+
+        print("Total number of books:", library.count_books())
+
+    elif choice == "7":
+
+        if library.is_empty():
+            print("The tree is empty.")
+        else:
+            print("The tree is not empty.")
+
+    elif choice == "8":
+
+        library.show_tree()
+
+    elif choice == "9":
+
+        number = int(input("Enter inventory number to delete: "))
+
+        library.delete_book(number)
 
     elif choice == "0":
-        print("\nProgram finished.")
+
+        print("Program finished.")
         break
 
     else:
-        print("\nInvalid choice. Please try again.")
+
+        print("Invalid choice. Please try again.")
