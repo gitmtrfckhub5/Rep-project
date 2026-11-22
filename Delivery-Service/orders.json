@@ -1,0 +1,85 @@
+[
+    {
+        "id": 1,
+        "name": "Client 1",
+        "contact": "0991234561",
+        "address": "Test Street, house 1",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 2,
+        "name": "Client 3",
+        "contact": "0991234563",
+        "address": "Test Street, house 3",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 3,
+        "name": "Client 2",
+        "contact": "0991234562",
+        "address": "Test Street, house 2",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 4,
+        "name": "Petr",
+        "contact": "0971234567",
+        "address": "Kyiv, Street 15",
+        "products": [
+            "coffee",
+            "milk"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 5,
+        "name": "Client 3",
+        "contact": "0991234563",
+        "address": "Test Street, house 3",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 6,
+        "name": "Client 1",
+        "contact": "0991234561",
+        "address": "Test Street, house 1",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    },
+    {
+        "id": 7,
+        "name": "Client 2",
+        "contact": "0991234562",
+        "address": "Test Street, house 2",
+        "products": [
+            "Bread",
+            "Milk",
+            "Cheese"
+        ],
+        "status": "Принят"
+    }
+]
